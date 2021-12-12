@@ -35,6 +35,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rubocop'
   gem 'rubocop-rails'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails', '~> 5.0.0'
+  gem 'rspec_junit_formatter'
 end
 
 group :development do
@@ -48,6 +51,11 @@ group :development do
   gem 'spring'
   gem 'better_errors'
   gem 'binding_of_caller'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
