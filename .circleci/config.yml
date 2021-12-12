@@ -1,0 +1,52 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.1.3
+  node: circleci/node@4.5.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.7.2-node-browsers
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+
+  test:
+    docker:
+      - image: circleci/ruby:2.7.2-node-browsers
+        environment:
+          RAILS_ENV: test
+      - image: circleci/postgres:13.4
+        environment:
+          POSTGRES_USER: oatmeal-app
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: oatmeal-app
+    working_directory: ~/oatmeal-app
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          name: Watting stand up database
+          command: |
+            dockerize -wait \
+            tcp://127.0.0.1:5432 -timeout 1m
+      - run: mv ./config/database.ci.yml ./config/database.yml
+      - run:
+          name: Database setup
+          command: |
+            bundle exec rails db:create db:migrate
+      - ruby/rspec-test
+      - ruby/rubocop-check
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
