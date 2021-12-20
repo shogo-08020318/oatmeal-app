@@ -16,7 +16,8 @@
     <% else %>
       <%= render 'shared/before_login_header' %>
     <% end %>
-    <div class="h-screen bg-orange-100">
+    <%= render 'shared/flash' %>
+    <div class="h-screen bg-orange-50">
       <%= yield %>
     </div>
     <%= render 'shared/footer' %>

@@ -5,14 +5,15 @@ class UserSessionsController < ApplicationController
     @user = login(params[:email], params[:password])
 
     if @user
-      redirect_back_or_to root_path
+      redirect_back_or_to root_path, success: 'ログインしました。'
     else
+      flash.now[:warning] = 'ログインに失敗しました。'
       render :new
     end
   end
 
   def destroy
     logout
-    redirect_to root_path
+    redirect_to root_path, success: 'ログアウトしました。'
   end
 end
