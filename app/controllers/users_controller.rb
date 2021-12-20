@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       auto_login(@user)
       redirect_to root_path, success: 'ユーザー登録が完了しました。'
     else
-      flash.now[:warning] = 'ユーザー登録に失敗しました。'
+      flash.now[:danger] = 'ユーザー登録に失敗しました。'
       render :new
     end
   end
