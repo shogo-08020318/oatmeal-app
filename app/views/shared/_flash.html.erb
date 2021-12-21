@@ -1,0 +1,7 @@
+<% flash.each do |message_type, message| %>
+  <div class="bg-<%= message_type %>-100 border-t-4 border-<%= message_type %>-500 rounded-b text-<%= message_type %>-900 px-4 py-3 shadow-md" role="alert">
+    <div class="flex">
+      <div><%= message %></div>
+    </div>
+  </div>
+<% end %>
