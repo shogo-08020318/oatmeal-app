@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  # ユーザーが複数の投稿を所持する
+  has_many :foods, dependent: :destroy
+
   # パスワードは半角アルファベット（大文字・小文字・数値）
   VALID_PASSWORD_REGEX = /\A[a-zA-Z0-9]+\z/.freeze
 
