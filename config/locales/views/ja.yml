@@ -1,0 +1,21 @@
+ja:
+  defaults:
+    login: ログイン
+    register: 新規登録
+    logout: ログアウト
+    no_acount: アカウントをお持ちでない方はこちら
+    already_acount: 既にアカウントお持ちの方はこちら
+  users:
+    new:
+      title: 新規登録
+    create:
+      success: ユーザー登録が完了しました
+      fail: ユーザーの登録に失敗しました
+  user_sessions:
+    new:
+      title: ログイン
+    create:
+      success: ログインしました
+      fail: ログインに失敗しました
+    destroy:
+      success: ログアウトしました

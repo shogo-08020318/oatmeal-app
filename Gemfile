@@ -63,3 +63,6 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # ユーザー認証
 gem 'sorcery'
+
+# i18n
+gem 'rails-i18n'

@@ -1,26 +1,26 @@
 <div class="h-screen flex justify-center items-center">
 	<div class="lg:w-2/5 md:w-1/2 w-11/12">
 		<%= form_with model: @user, local: true, class: "bg-white p-5 lg:p-10 rounded-lg shadow-lg min-w-full" do |f| %>
-			<h1 class="text-center text-2xl mb-6 text-gray-600 font-bold font-sans">新規登録</h1>
+			<h1 class="text-center text-2xl mb-6 text-gray-600 font-bold font-sans"><%= t('.title') %></h1>
       <%= render 'shared/error_messages', object: f.object %>
       <div>
-      	<%= f.label :name, "お名前", class: "text-gray-800 font-semibold block my-3 text-md" %>
+      	<%= f.label :name, class: "text-gray-800 font-semibold block my-3 text-md" %>
 			  <%= f.text_field :name, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none", placeholder: "オーツ太郎" %>
       </div>
       <div>
-      	<%= f.label :email, "メールアドレス", class: "text-gray-800 font-semibold block my-3 text-md" %>
+      	<%= f.label :email, class: "text-gray-800 font-semibold block my-3 text-md" %>
 			  <%= f.email_field :email, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none", placeholder: "oatmeal@example.com" %>
       </div>
       <div>
-      	<%= f.label :password, "パスワード", class: "text-gray-800 font-semibold block my-3 text-md" %>
+      	<%= f.label :password, class: "text-gray-800 font-semibold block my-3 text-md" %>
 			  <%= f.password_field :password, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none", placeholder: "password" %>
       </div>
       <div>
-      	<%= f.label :password_confirmation, "パスワード確認", class: "text-gray-800 font-semibold block my-3 text-md" %>
+      	<%= f.label :password_confirmation, class: "text-gray-800 font-semibold block my-3 text-md" %>
 			  <%= f.password_field :password_confirmation, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none", placeholder: "password" %>
       </div>
       <%= f.submit class: "w-full mt-6 bg-orange-400 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans" %>
     <% end %>
-    <%= link_to "既にアカウントお持ちの方はこちら", "#", class: "flex justify-center items-center mt-6 mb-3 text-sm lg:text-lg text-orange-700 tracking-wide font-semibold font-sans" %>
+    <%= link_to t('defaults.already_acount'), login_path, class: "flex justify-center items-center mt-6 mb-3 text-sm lg:text-lg text-orange-700 tracking-wide font-semibold font-sans" %>
 	</div>
 </div>
