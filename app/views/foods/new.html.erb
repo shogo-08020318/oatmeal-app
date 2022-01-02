@@ -1,0 +1,37 @@
+<div class="h-screen flex justify-center items-center">
+	<div class="lg:w-2/5 md:w-1/2 w-11/12">
+		<%= form_with model: @food, local: true, class: "bg-white p-5 lg:p-10 rounded-lg shadow-lg min-w-full" do |f| %>
+			<h1 class="text-center text-2xl mb-6 text-gray-600 font-bold font-sans"><%= t('.title') %></h1>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div>
+      	<%= f.label :name, class: "text-gray-800 font-semibold block my-3 text-md" %>
+			  <%= f.text_field :name, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+      </div>
+      <div>
+      	<%= f.label :recipe, class: "text-gray-800 font-semibold block my-3 text-md" %>
+			  <%= f.text_area :recipe, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+      </div>
+      <div>
+      	<%= f.label :image, class: "text-gray-800 font-semibold block my-3 text-md" %>
+			  <%= f.file_field :image, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+      </div>
+      <div>
+      	<%= f.label :cooking_comment, class: "text-gray-800 font-semibold block my-3 text-md" %>
+			  <%= f.text_area :cooking_comment, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+      </div>
+      <div>
+      	<%= f.label :cooking_time, class: "text-gray-800 font-semibold block my-3 text-md" %>
+			  <%= f.text_field :cooking_time, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+      </div>
+      <div>
+      	<%= f.label :cooking_time_unit, class: "text-gray-800 font-semibold block my-3 text-md" %>
+        <%= f.select :cooking_time_unit, Food.cooking_time_units.keys.map {|k| [I18n.t("enums.food.cooking_time_unit.#{k}"), k]}, { include_blank: "選択してください" },class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+      </div>
+      <div>
+      	<%= f.label :serving, class: "text-gray-800 font-semibold block my-3 text-md" %>
+			  <%= f.text_field :serving, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+      </div>
+      <%= f.submit class: "w-full mt-6 bg-orange-400 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans" %>
+    <% end %>
+	</div>
+</div>

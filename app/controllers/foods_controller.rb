@@ -6,7 +6,7 @@ class FoodsController < ApplicationController
   def create
     @food = current_user.foods.build(food_params)
     if @food.save
-      redirect_to foods_path, success: t('.secucess')
+      redirect_to root_path, success: t('.success')
     else
       flash[:danger] = t('.fail')
       render :new
