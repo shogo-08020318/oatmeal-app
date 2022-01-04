@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2022_01_04_093427) do
     t.bigint "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["food_id", "tag_id"], name: "index_food_tags_on_food_id_and_tag_id", unique: true
     t.index ["food_id"], name: "index_food_tags_on_food_id"
     t.index ["tag_id"], name: "index_food_tags_on_tag_id"
   end
