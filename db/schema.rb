@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_21_223536) do
+ActiveRecord::Schema.define(version: 2022_01_04_093427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "food_tags", force: :cascade do |t|
+    t.bigint "food_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["food_id"], name: "index_food_tags_on_food_id"
+    t.index ["tag_id"], name: "index_food_tags_on_tag_id"
+  end
 
   create_table "foods", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -30,6 +39,12 @@ ActiveRecord::Schema.define(version: 2021_12_21_223536) do
     t.index ["user_id"], name: "index_foods_on_user_id"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -42,5 +57,7 @@ ActiveRecord::Schema.define(version: 2021_12_21_223536) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "food_tags", "foods"
+  add_foreign_key "food_tags", "tags"
   add_foreign_key "foods", "users"
 end

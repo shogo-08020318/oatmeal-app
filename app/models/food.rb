@@ -1,6 +1,11 @@
 class Food < ApplicationRecord
   belongs_to :user
 
+  # foodはtagとの関係を複数持ち、foodが削除されればそのfoodのidを持つレコードも削除
+  has_many :food_tags, dependent: :destroy
+  # tagとはfood_tagsを介してつながる
+  has_many :tags, through: :food_tags
+
   validates :name, presence: true
   # 作り方の文字数を制限
   validates :recipe, presence: true, length: { maximum: 528 }
