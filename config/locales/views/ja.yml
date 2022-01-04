@@ -20,6 +20,8 @@ ja:
     destroy:
       success: ログアウトしました。
   foods:
+    index:
+      title: レシピ一覧
     new:
       title: レシピ作成
     create:

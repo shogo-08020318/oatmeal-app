@@ -1,4 +1,8 @@
 class FoodsController < ApplicationController
+  def index
+    @foods = Food.all.includes(:user).order(created_at: :desc)
+  end
+
   def new
     @food = current_user.foods.build
   end
