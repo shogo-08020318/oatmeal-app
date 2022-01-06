@@ -4,15 +4,15 @@ class FoodsController < ApplicationController
   end
 
   def new
-    @food = current_user.foods.build
+    @form = FoodTagForm.new
   end
 
   def create
-    @food = current_user.foods.build(food_params)
-    if @food.save
+    @form = FoodTagForm.new(food_params)
+    if @form.save
       redirect_to foods_path, success: t('.success')
     else
-      flash[:danger] = t('.fail')
+      flash.now[:danger] = t('.fail')
       render :new
     end
   end
@@ -20,6 +20,6 @@ class FoodsController < ApplicationController
   private
 
   def food_params
-    params.require(:food).permit(:name, :recipe, :image, :cooking_comment, :cooking_time, :cooking_time_unit, :serving)
+    params.require(:food_tag_form).permit(:name, :recipe, :image, :cooking_comment, :cooking_time, :cooking_time_unit, :serving, { food_tags: [] }).merge(user_id: current_user.id)
   end
 end

@@ -28,6 +28,7 @@ ja:
         cooking_time: 調理時間
         cooking_time_unit: 調理時間の単位
         serving: 何人前
+        tag: タグ
   enums:
     food:
       cooking_time_unit:
