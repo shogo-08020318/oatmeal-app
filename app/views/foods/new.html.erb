@@ -33,7 +33,9 @@
       </div>
       <div>
       	<%= f.label :tag, class: "text-gray-800 font-semibold block my-3 text-md" %>
-			  <%= f.collection_check_boxes :food_tags, Tag.all, :id, :name, include_hidden: false, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+			  <%= f.collection_check_boxes :food_tags, Tag.all, :id, :name, include_hidden: false, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" do |b| %>
+          <%= b.label(class: "bg-yellow-100 border-2 rounded-md border-orange-500 text-orange-500 mr-2 px-2") { b.check_box(class: "hidden") + b.text } %>
+        <% end %>
       </div>
       <%= f.submit class: "w-full mt-6 bg-orange-400 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans" %>
     <% end %>
