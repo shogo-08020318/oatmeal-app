@@ -69,3 +69,6 @@ gem 'rails-i18n'
 
 # enumの日本語化
 gem 'enum_help'
+
+# 初期データ作成
+gem 'seed-fu'

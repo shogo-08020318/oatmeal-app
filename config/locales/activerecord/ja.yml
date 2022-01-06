@@ -2,6 +2,8 @@ ja:
   activerecord:
     models:
       users: ユーザー
+      foods: レシピ
+      tags: タグ
     attributes:
       user:
         name: 名前
@@ -16,6 +18,17 @@ ja:
         cooking_time: 調理時間
         cooking_time_unit: 調理時間の単位
         serving: 何人前
+  activemodel:
+    attributes:
+      food_tag_form:
+        name: レシピ名
+        recipe: 作り方
+        image: 料理写真
+        cooking_comment: コメント
+        cooking_time: 調理時間
+        cooking_time_unit: 調理時間の単位
+        serving: 何人前
+        tag: タグ
   enums:
     food:
       cooking_time_unit:
