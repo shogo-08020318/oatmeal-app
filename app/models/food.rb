@@ -1,4 +1,7 @@
 class Food < ApplicationRecord
+  # アップローダークラスとモデルの紐付け
+  mount_uploader :image, ImageUploader
+
   belongs_to :user
 
   # foodはtagとの関係を複数持ち、foodが削除されればそのfoodのidを持つレコードも削除
