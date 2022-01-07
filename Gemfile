@@ -72,3 +72,6 @@ gem 'enum_help'
 
 # 初期データ作成
 gem 'seed-fu'
+
+# 画像アップロード
+gem 'carrierwave', '~> 2.0'
