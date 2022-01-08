@@ -335,6 +335,7 @@ DEPENDENCIES
   factory_bot_rails
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  mini_magick
   pg (~> 1.1)
   pry-byebug
   pry-rails

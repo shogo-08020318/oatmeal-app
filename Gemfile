@@ -75,3 +75,6 @@ gem 'seed-fu'
 
 # 画像アップロード
 gem 'carrierwave', '~> 2.0'
+
+# 画像のリサイズ
+gem 'mini_magick'
