@@ -3,20 +3,14 @@ class FoodTagForm
 
   attr_accessor :name, :image, :recipe, :cooking_comment, :cooking_time, :cooking_time_unit, :serving, :user_id, :food_tags, :food_id, :tag_id
 
-  with_options presence: true do
-    validates :name
-    # 作り方の文字数を制限
-    validates :recipe, length: { maximum: 528 }
-    validates :cooking_time
-    validates :cooking_time_unit
-    # 何人前か上限と下限を指定（整数で1〜10）
-    validates :serving, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
-  end
+  validate :food_validate
 
   def save
+    return false if invalid?
+
     ActiveRecord::Base.transaction do
       food = Food.new(food_params)
-      food.save
+      food.save!
 
       food_tags.each do |food_tag|
         food.food_tags.create(tag_id: food_tag)
@@ -41,5 +35,14 @@ class FoodTagForm
       serving: serving,
       user_id: user_id
     }
+  end
+
+  def food_validate
+    food = Food.new(food_params)
+    return if food.valid?
+
+    food.errors.each do |at, er|
+      errors.add(at, er)
+    end
   end
 end

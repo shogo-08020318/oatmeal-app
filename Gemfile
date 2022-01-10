@@ -72,3 +72,12 @@ gem 'enum_help'
 
 # 初期データ作成
 gem 'seed-fu'
+
+# 画像アップロード
+gem 'carrierwave', '~> 2.0'
+
+# 画像のエラーメッセージの日本語化
+gem 'carrierwave-i18n'
+
+# 画像のリサイズ
+gem 'mini_magick'
