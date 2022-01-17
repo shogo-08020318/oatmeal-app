@@ -1,7 +1,7 @@
-class FoodTagForm
+class FoodForm
   include ActiveModel::Model
 
-  DEFAULT_INGREDIENT_COUNT = 5
+  DEFAULT_INGREDIENT_COUNT = 3
 
   attr_accessor :name, :image, :recipe, :cooking_comment, :cooking_time, :cooking_time_unit, :serving, :user_id, :food_tags, :food_id, :tag_id, :ingredients, :ingredient_name, :quantity, :proper_quantity
 

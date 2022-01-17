@@ -27,7 +27,7 @@ ja:
         proper_quantity: 適量
   activemodel:
     attributes:
-      food_tag_form:
+      food_form:
         name: レシピ名
         recipe: 作り方
         image: 料理写真
