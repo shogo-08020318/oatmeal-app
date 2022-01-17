@@ -1,7 +1,7 @@
 class Ingredient < ApplicationRecord
   belongs_to :food
 
-  validates :name, presence: true
+  validates :ingredient_name, presence: true
 
   validate :quantity_or_proper_quantity_check
 
