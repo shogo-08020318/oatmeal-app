@@ -20,6 +20,6 @@ class FoodsController < ApplicationController
   private
 
   def food_params
-    params.require(:food_tag_form).permit(:name, :recipe, :image, :cooking_comment, :cooking_time, :cooking_time_unit, :serving, { food_tags: [] }).merge(user_id: current_user.id)
+    params.require(:food_tag_form).permit(:name, :recipe, :image, :cooking_comment, :cooking_time, :cooking_time_unit, :serving, { food_tags: [] }, ingredients_attributes: %i[ingredient_name quantity proper_quantity]).merge(user_id: current_user.id)
   end
 end
