@@ -8,6 +8,8 @@ class Food < ApplicationRecord
   has_many :food_tags, dependent: :destroy
   # tagとはfood_tagsを介してつながる
   has_many :tags, through: :food_tags
+  # foodはingredientsとの関係を複数持ち、foodが削除されればそのfoodのidを持つレコードも削除
+  has_many :ingredients, dependent: :destroy
 
   with_options presence: true do
     validates :name

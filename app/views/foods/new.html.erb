@@ -37,6 +37,25 @@
           <%= b.label(class: "bg-yellow-100 border-2 rounded-md border-orange-500 text-orange-500 mr-2 px-2") { b.check_box(class: "hidden") + b.text } %>
         <% end %>
       </div>
+      <div>
+        <%= f.label :ingredient, class: "text-gray-800 font-semibold block my-3 text-md" %>
+        <%= f.fields_for :ingredients do |i| %>
+        <div class="grid grid-cols-4 gap-4">
+          <div class="col-span-2">
+            <%= f.label :ingredient_name, class: "text-gray-800 font-semibold block my-3 text-sm" %>
+            <%= i.text_field :ingredient_name, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+          </div>
+          <div>
+            <%= f.label :quantity, class: "text-gray-800 font-semibold block my-3 text-sm" %>
+            <%= i.text_field :quantity, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+          </div>
+          <div class="text-center">
+            <%= f.label :proper_quantity, class: "text-gray-800 font-semibold block my-3 text-sm" %>
+            <%= i.check_box :proper_quantity, {}, true, false %>
+          </div>
+        </div>
+        <% end %>
+      </div>
       <%= f.submit class: "w-full mt-6 bg-orange-400 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans" %>
     <% end %>
 	</div>
