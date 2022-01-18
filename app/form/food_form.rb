@@ -8,7 +8,8 @@ class FoodForm
   validate :food_validate
   validate :ingredient_validate
 
-  def initialize(attributes = nil, food_tag: FoodTag.new)
+  def initialize(attributes = nil, food: Food.new, food_tag: FoodTag.new)
+    @food = food
     @food_tag = food_tag
     self.ingredients = DEFAULT_INGREDIENT_COUNT.times.map { Ingredient.new } unless ingredients.present?
     super(attributes)
