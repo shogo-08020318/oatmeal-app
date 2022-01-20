@@ -1,5 +1,17 @@
 class FoodsController < ApplicationController
+  require 'google/cloud/translate'
+
   def index
+    project_id = Rails.application.credentials.google[:CLOUD_PROJECT_ID]
+
+    translate = Google::Cloud::Translate.new version: :v2, project_id: project_id
+
+    @text = %w[[オートミール 20g] [卵 3個]]
+
+    target = 'en'
+
+    @translation = translate.translate(@text, to: target)
+
     @foods = Food.all.includes(:user, :tags).order(created_at: :desc)
   end
 

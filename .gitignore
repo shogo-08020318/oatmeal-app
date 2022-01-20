@@ -37,3 +37,5 @@ yarn-debug.log*
 
 .DS_Store
 /public/uploads
+/config/google_cloud.json
+/config/local_env.yml
