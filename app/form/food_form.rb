@@ -1,5 +1,6 @@
 class FoodForm
   include ActiveModel::Model
+  require 'google/cloud/translate'
 
   DEFAULT_INGREDIENT_COUNT = 3
 
@@ -34,10 +35,19 @@ class FoodForm
         end
       end
 
+      # 翻訳する値を格納する配列
+      @translate_array = []
+
       ingredients.each do |ingredient|
         food_ingredient = food.ingredients.build(ingredient_params(ingredient))
         food_ingredient.save!
+
+        # 翻訳に使う値を取り出して格納
+        @translate_array.push(food_ingredient[:ingredient_name], food_ingredient[:quantity])
       end
+
+      # 翻訳する処理を実行
+      translated_ingredients = google_translation(@translate_array)
 
       true
     end
@@ -89,5 +99,21 @@ class FoodForm
       end
     end
     errors.uniq!
+  end
+
+  def google_translation(*ingredients)
+    project_id = Rails.application.credentials.google[:CLOUD_PROJECT_ID]
+    translate = Google::Cloud::Translate.new version: :v2, project_id: project_id
+    target = 'en'
+    text = ingredients
+    translation = translate.translate(text, to: target)
+
+    @translated_ingredients = []
+    translation.each_slice(2) do |a, b|
+      translated_ingredient = []
+      translated_ingredient.push(a.text, b.text)
+      @translated_ingredients << translated_ingredient
+    end
+    @translated_ingredients
   end
 end
