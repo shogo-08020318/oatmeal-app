@@ -11,6 +11,9 @@ class Food < ApplicationRecord
   # foodはingredientsとの関係を複数持ち、foodが削除されればそのfoodのidを持つレコードも削除
   has_many :ingredients, dependent: :destroy
 
+  # レシピは対して必ずマクロ栄養素のデータを持つ
+  has_one :nutrition, dependent: :destroy
+
   with_options presence: true do
     validates :name
     # 作り方の文字数を制限

@@ -81,3 +81,7 @@ gem 'carrierwave-i18n'
 
 # 画像のリサイズ
 gem 'mini_magick'
+
+# 翻訳API
+gem 'google-cloud'
+gem 'google-cloud-translate'

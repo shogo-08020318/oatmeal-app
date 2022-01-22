@@ -55,5 +55,10 @@ module OatmealApp
       g.helper false
       g.test_framework false
     end
+
+    config.before_configuration do
+      env_file = File.join(Rails.root, 'config', 'local_env.yml')
+      YAML.safe_load(File.open(env_file)).each { |key, value| ENV[key.to_s] = value } if File.exist?(env_file)
+    end
   end
 end
