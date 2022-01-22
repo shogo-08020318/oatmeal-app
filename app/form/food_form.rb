@@ -31,7 +31,7 @@ class FoodForm
 
       if food_tags.present?
         food_tags.each do |food_tag|
-          food.food_tags.create(tag_id: food_tag)
+          food.food_tags.create!(tag_id: food_tag)
         end
       end
 
@@ -39,15 +39,18 @@ class FoodForm
       @translate_array = []
 
       ingredients.each do |ingredient|
-        food_ingredient = food.ingredients.build(ingredient_params(ingredient))
+        food_ingredient = food.ingredients.create!(ingredient_params(ingredient))
         food_ingredient.save!
-
         # 翻訳に使う値を取り出して格納
-        @translate_array.push(food_ingredient[:ingredient_name], food_ingredient[:quantity])
+        @translate_array.push(food_ingredient[:quantity], food_ingredient[:ingredient_name])
       end
 
       # 翻訳する処理を実行
       translated_ingredients = google_translation(@translate_array)
+      # 翻訳したデータを使ってマクロ栄養素を算出
+      nutrition_data = nutrition_calculate(translated_ingredients)
+      # 投稿されたレシピのマクロ栄養素として保存
+      food.create_nutrition!(nutrition_data)
 
       true
     end
@@ -112,8 +115,24 @@ class FoodForm
     translation.each_slice(2) do |a, b|
       translated_ingredient = []
       translated_ingredient.push(a.text, b.text)
-      @translated_ingredients << translated_ingredient
+      @translated_ingredients << translated_ingredient.join('%20')
     end
     @translated_ingredients
+  end
+
+  def nutrition_calculate(ingredients)
+    app_id = Rails.application.credentials.edamam[:app_id]
+    app_key = Rails.application.credentials.edamam[:app_key]
+    ingr = ingredients.join('%20and%20')
+    url = URI.parse("https://api.edamam.com/api/nutrition-data?app_id=#{app_id}&app_key=#{app_key}&ingr=#{ingr}")
+    response = Net::HTTP.get_response(url)
+    response_body = JSON.parse(response.body)
+    {
+      calories: response_body['totalNutrients']['ENERC_KCAL']['quantity'],
+      carbo: response_body['totalNutrients']['CHOCDF']['quantity'],
+      fiber: response_body['totalNutrients']['FIBTG']['quantity'],
+      protein: response_body['totalNutrients']['PROCNT']['quantity'],
+      fat: response_body['totalNutrients']['FAT']['quantity']
+    }
   end
 end
