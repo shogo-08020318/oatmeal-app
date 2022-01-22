@@ -40,7 +40,6 @@ class FoodForm
 
       ingredients.each do |ingredient|
         food_ingredient = food.ingredients.create!(ingredient_params(ingredient))
-        food_ingredient.save!
         # 翻訳に使う値を取り出して格納
         @translate_array.push(food_ingredient[:quantity], food_ingredient[:ingredient_name])
       end
