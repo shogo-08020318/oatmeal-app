@@ -3,7 +3,9 @@
     <%= image_tag food.image_url(:thumb), class: "w-11/12 shadow-lg" %>
   </div>
   <div class="px-6 pb-4">
-    <div class="font-bold text-xl mb-2"><%= food.name %></div>
+    <div class="font-bold text-xl mb-2">
+    <%= link_to food.name, food_path(food.uuid) %>
+    </div>
     <p class="text-gray-700 text-base">
       <%= food.cooking_comment %>
     </p>

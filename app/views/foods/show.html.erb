@@ -1,0 +1,66 @@
+<div class="flex justify-center">
+  <div class="py-6 w-full px-5">
+    <!-- Image gallery -->
+    <div class="bg-white pt-6 pb-3 m-7 rounded-2xl shadow-xl">
+      <h1 class="text-5xl text-center py-3 font-bold"><%= @food.name %></h1>
+      <div class="px-10 mt-6 mx-auto grid grid-cols-2 gap-x-8">
+        <div>
+          <%= image_tag @food.image_url(:show), class: "w-full shadow-lg rounded-lg" %>
+          <div class="p-5">
+            <p class="text-xl">投稿者</p>
+            <%= link_to @food.user.name, '#', class: "text-3xl" %>
+          </div>
+        </div>
+        <div class="aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
+          <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg" alt="Model wearing plain white basic tee." class="w-full h-full object-center object-cover">
+        </div>
+      </div>
+
+      <!-- Product info -->
+      <div class="m-5 p-4 border-t-2 border-gray-200">
+        <div class="bg-yellow-50">
+          <div class="grid grid-cols-2">
+            <div>
+              <!--材料 -->
+              <div class="p-3">
+                <h1 class="text-2xl font-bold underline"><%= Ingredient.model_name.human %></h1>
+                <div class="p-2">
+                  <ul class="list-disc list-inside">
+                    <% @food.ingredients.each do |ingredient| %>
+                      <li><%= ingredient.ingredient_name %> : <%= ingredient.quantity %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+              <!-- コメント -->
+              <div class="p-3">
+                <h1 class="text-2xl font-bold underline"><%= Food.human_attribute_name(:cooking_comment) %></h1>
+                <div class="p-2">
+                  <%= simple_format(@food.cooking_comment) %>
+                </div>
+              </div>
+            </div>
+            <div>
+              <!-- 作り方 -->
+              <div class="p-3">
+                <h1 class="text-2xl font-bold underline"><%= Food.human_attribute_name(:recipe) %></h1>
+                <div class="p-2">
+                  <%= simple_format(@food.recipe) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- タグ -->
+          <div class="p-3">
+            <h1 class="text-2xl font-bold underline"><%= Tag.model_name.human %></h1>
+            <div class="flex justify-start pt-3">
+              <% @food.tags.each do |tag| %>
+                <p class="bg-orange-400 rounded-md text-orange-50 text-xl mr-3 px-4 py-1"><%= tag.name %></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
