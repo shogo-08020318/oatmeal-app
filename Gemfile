@@ -85,3 +85,7 @@ gem 'mini_magick'
 # 翻訳API
 gem 'google-cloud'
 gem 'google-cloud-translate'
+
+# グラフ
+gem 'chart-js-rails'
+gem 'gon'
