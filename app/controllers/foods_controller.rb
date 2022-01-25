@@ -5,6 +5,7 @@ class FoodsController < ApplicationController
 
   def show
     @food = Food.find_by(uuid: params[:uuid])
+    gon.nutrition = @food.nutrition
   end
 
   def new

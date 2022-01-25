@@ -3,21 +3,49 @@
     <!-- Image gallery -->
     <div class="bg-white pt-6 pb-3 m-7 rounded-2xl shadow-xl">
       <h1 class="text-5xl text-center py-3 font-bold"><%= @food.name %></h1>
-      <div class="px-10 mt-6 mx-auto grid grid-cols-2 gap-x-8">
+      <div class="pl-10 pr-3 mt-6 mx-auto grid grid-cols-2 gap-x-8">
         <div>
-          <%= image_tag @food.image_url(:show), class: "w-full shadow-lg rounded-lg" %>
+          <div class="">
+            <%= image_tag @food.image_url(:show), class: "w-full shadow-lg rounded-xl relative z-1 bg-orange-50 p-3" %>
+          </div>
           <div class="p-5">
-            <p class="text-xl">投稿者</p>
+            <p class="text-xl"><i class="fas fa-user-edit"></i>投稿者</p>
             <%= link_to @food.user.name, '#', class: "text-3xl" %>
           </div>
         </div>
-        <div class="aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
-          <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg" alt="Model wearing plain white basic tee." class="w-full h-full object-center object-cover">
+        <div class="flex flex-wrap" id="tabs-id">
+          <div class="w-full">
+            <ul class="flex mb-0 list-none flex-wrap flex-row">
+              <li class="-mb-px last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-orange-400" onclick="changeAtiveTab(event,'tab-profile')">
+                  マクロ
+                </a>
+              </li>
+              <li class="-mb-px last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-orange-400 bg-white" onclick="changeAtiveTab(event,'tab-settings')">
+                  カロリー
+                </a>
+              </li>
+            </ul>
+            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded border-2 border-orange-400">
+              <div class="flex-auto">
+                <div class="tab-content tab-space pt-5">
+                  <div class="block" id="tab-profile">
+                    <p class="text-center text-sm pb-2">マクロ栄養素(g)</p>
+                    <canvas class="" id="chartRadar" style="display: block; height: 900px; width: 1050px;"></canvas>
+                  </div>
+                  <div class="hidden" id="tab-settings">
+                    カロリー
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Product info -->
-      <div class="m-5 p-4 border-t-2 border-gray-200">
+      <div class="m-5 pt-4 border-t-2 border-gray-200 shadow-lg">
         <div class="bg-yellow-50">
           <div class="grid grid-cols-2">
             <div>
@@ -64,3 +92,83 @@
     </div>
   </div>
 </div>
+
+<!-- Chart doughnut -->
+<script>
+  const dataRadar = {
+    labels: [
+      "炭水化物",
+      "タンパク質",
+      "脂質"
+    ],
+    datasets: [
+      {
+        data: [
+          gon.nutrition.carbo,
+          gon.nutrition.protein,
+          gon.nutrition.fat
+        ],
+        fill: true,
+        backgroundColor: "rgba(255,204,0,0.2)",
+        borderColor: "rgb(255,153,51)",
+        pointBackgroundColor: "rgb(255,153,51)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgb(255,153,51)",
+      }
+    ],
+  };
+
+  const configRadarChart = {
+    type: "radar",
+    data: dataRadar,
+    options: {
+      scale: {
+        ticks: {
+          suggestedMin: 0,
+          stepSize: 5,
+          fontSize: 20,
+          fontColor: '#000'
+        },
+        pointLabels: {
+          fontSize: 20,
+          fontColor: '#000'
+        }
+      },
+      legend: {
+        display: false
+      }
+    }
+  };
+
+  var chartBar = new Chart(
+    document.getElementById("chartRadar"),
+    configRadarChart
+  );
+</script>
+
+<script type="text/javascript">
+  function changeAtiveTab(event,tabID){
+    let element = event.target;
+    while(element.nodeName !== "A"){
+      element = element.parentNode;
+    }
+    ulElement = element.parentNode.parentNode;
+    aElements = ulElement.querySelectorAll("li > a");
+    tabContents = document.getElementById("tabs-id").querySelectorAll(".tab-content > div");
+    for(let i = 0 ; i < aElements.length; i++){
+      aElements[i].classList.remove("text-white");
+      aElements[i].classList.remove("bg-orange-400");
+      aElements[i].classList.add("text-orange-400");
+      aElements[i].classList.add("bg-white");
+      tabContents[i].classList.add("hidden");
+      tabContents[i].classList.remove("block");
+    }
+    element.classList.remove("text-orange-400");
+    element.classList.remove("bg-white");
+    element.classList.add("text-white");
+    element.classList.add("bg-orange-400");
+    document.getElementById(tabID).classList.remove("hidden");
+    document.getElementById(tabID).classList.add("block");
+  }
+</script>
