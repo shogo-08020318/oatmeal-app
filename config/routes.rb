@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   delete '/logout', to: 'user_sessions#destroy'
 
   resources :users, only: %i[new create]
-  resources :foods, only: %i[index new create]
+  resources :foods, param: :uuid, only: %i[index show new create]
 end

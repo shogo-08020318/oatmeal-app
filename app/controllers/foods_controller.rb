@@ -3,6 +3,12 @@ class FoodsController < ApplicationController
     @foods = Food.all.includes(:user, :tags).order(created_at: :desc)
   end
 
+  def show
+    @food = Food.find_by(uuid: params[:uuid])
+    gon.nutrition = @food.nutrition
+    gon.nutrition_calories = @food.nutrition.calorie_calculates
+  end
+
   def new
     @form = FoodForm.new
   end

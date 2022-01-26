@@ -8,6 +8,7 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import '@fortawesome/fontawesome-free/js/all'
 import "../src/application.scss"
+require('chart.js')
 
 Rails.start()
 ActiveStorage.start()
