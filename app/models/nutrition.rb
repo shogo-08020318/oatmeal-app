@@ -12,7 +12,7 @@ class Nutrition < ApplicationRecord
   def calorie_calculates
     macro_calories = [carbo * 4, protein * 4, fat * 9]
     results = []
-    macro_calories.each { |calorie| results << calorie / calories * 100 }
-    results
+    macro_calories.each { |calorie| results << (calorie / calories * 100).round(1) }
+    results << calories.to_i
   end
 end
