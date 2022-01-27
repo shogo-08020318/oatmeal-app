@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def show
+    @user = User.find_by(uuid: params[:uuid])
+  end
+
   def new
     @user = User.new
   end
