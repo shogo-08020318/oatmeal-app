@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def show
     @user = User.find_by(uuid: params[:uuid])
-    @user_foods = @user.foods
   end
 
   def new
