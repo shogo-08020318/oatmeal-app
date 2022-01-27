@@ -11,7 +11,7 @@
     </p>
   </div>
   <p class="text-gray-700 text-base px-5 pb-2 underline">
-    <i class="fas fa-user-alt"></i><%= food.user.name %>
+    <i class="fas fa-user-alt"></i><%= link_to food.user.name, user_path(food.user.uuid) %>
   </p>
   <div class="px-6 pb-2">
     <% food.tags.each do |tag| %>
