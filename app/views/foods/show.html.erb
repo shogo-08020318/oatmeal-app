@@ -10,7 +10,7 @@
           </div>
           <div class="p-5">
             <p class="text-xl"><i class="fas fa-user-edit"></i>投稿者</p>
-            <%= link_to @food.user.name, '#', class: "text-3xl" %>
+            <%= link_to @food.user.name, user_path(@food.user.uuid), class: "text-3xl" %>
           </div>
         </div>
         <div class="flex flex-wrap" id="tabs-id">
