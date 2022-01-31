@@ -1,6 +1,6 @@
 <div class="flex justify-center items-center py-10">
 	<div class="lg:w-2/5 md:w-1/2 w-11/12">
-		<%= form_with model: @form, local: true, class: "bg-white p-5 lg:p-10 rounded-lg shadow-lg min-w-full" do |f| %>
+		<%= form_with model: @form, url: food_path(@food.uuid), local: true, class: "bg-white p-5 lg:p-10 rounded-lg shadow-lg min-w-full" do |f| %>
 			<h1 class="text-center text-2xl mb-6 text-gray-600 font-bold font-sans"><%= t('.title') %></h1>
       <%= render 'shared/error_messages', object: f.object %>
       <div>
@@ -33,8 +33,8 @@
       </div>
       <div>
       	<%= f.label 'タグ', class: "text-gray-800 font-semibold block my-3 text-md" %>
-			  <%= f.collection_check_boxes :food_tags, Tag.all, :id, :name, include_hidden: false, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" do |b| %>
-          <%= b.label(class: "bg-yellow-100 border-2 rounded-md border-orange-500 text-orange-500 mr-2 px-2") { b.check_box(class: "hidden") + b.text } %>
+			  <%= f.collection_check_boxes :food_tags, Tag.all, :id, :name, { checked: @food.tag_ids.map(&:to_param) }, class: "hidden w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" do |b| %>
+          <%= b.label(class: "bg-yellow-100 border-2 rounded-md border-orange-500 text-orange-500 mr-2 px-2 active:bg-red-600") { b.check_box + b.text } %>
         <% end %>
       </div>
       <div>
