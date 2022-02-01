@@ -23,9 +23,24 @@ class FoodsController < ApplicationController
     end
   end
 
+  def edit
+    @food = Food.find_by(uuid: params[:uuid])
+    @form = FoodForm.new(food: @food)
+  end
+
+  def update
+    @food = Food.find_by(uuid: params[:uuid])
+    @form = FoodForm.new(food_params, food: @food)
+    if @form.update
+      redirect_to food_path(@food.uuid)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def food_params
-    params.require(:food_form).permit(:name, :recipe, :image, :cooking_comment, :cooking_time, :cooking_time_unit, :serving, { food_tags: [] }, ingredients_attributes: %i[ingredient_name quantity proper_quantity]).merge(user_id: current_user.id)
+    params.require(:food).permit(:name, :recipe, :image, :cooking_comment, :cooking_time, :cooking_time_unit, :serving, { food_tags: [] }, ingredients: %i[ingredient_name quantity proper_quantity]).merge(user_id: current_user.id)
   end
 end

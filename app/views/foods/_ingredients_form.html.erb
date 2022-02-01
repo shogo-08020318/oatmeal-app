@@ -1,5 +1,5 @@
 <div class="js-medium-form border border-orange-400 rounded-xl p-4 mb-3">
-  <%= f.fields_for :ingredients, Ingredient.new, {} do |i| %>
+  <%= f.fields_for 'ingredients[]', Ingredient.new, {} do |i| %>
     <div class="grid grid-cols-6 gap-4">
       <div class="col-span-3">
         <%= i.label :ingredient_name,class: "text-gray-800 font-semibold block my-3 text-sm" %>
