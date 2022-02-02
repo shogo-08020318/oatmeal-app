@@ -16,12 +16,7 @@
       </p>
       <div>
         <% if current_user.mine?(food) %>
-          <%= link_to edit_food_path(food.uuid) do %>
-            <i class="fas fa-pencil-alt mr-2 text-green-700"></i>
-          <% end %>
-          <%= link_to food_path(food.uuid), method: :delete do %>
-            <i class="fas fa-trash-alt mr-2 text-red-700"></i>
-          <% end %>
+          <%= render 'update_destroy', food: food  %>
         <% end %>
       </div>
   </div>
