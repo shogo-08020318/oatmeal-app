@@ -25,27 +25,12 @@ class FoodForm
     return false if invalid?
 
     ActiveRecord::Base.transaction do
+      # レシピの作成
       food = Food.create!(food_params)
-
       # タグのidを渡す
       food.tag_ids = food_tags
-
-      # 翻訳する値を格納する配列
-      @translate_array = []
-
-      ingredients.each do |ingredient|
-        food_ingredient = food.ingredients.create!(ingredient_params(ingredient))
-        # 翻訳に使う値を取り出して格納
-        @translate_array.push(food_ingredient[:quantity], food_ingredient[:ingredient_name])
-      end
-
-      # 翻訳する処理を実行
-      translated_ingredients = google_translation(@translate_array)
-      # 翻訳したデータを使ってマクロ栄養素を算出
-      nutrition_data = nutrition_calculate(translated_ingredients)
-      # 投稿されたレシピのマクロ栄養素として保存
-      food.create_nutrition!(nutrition_data)
-
+      # 材料の作成とマクロp栄養素の計算
+      ingredients_and_nutrition(food)
       true
     end
   rescue StandardError => e
@@ -57,28 +42,14 @@ class FoodForm
     return false if invalid?
 
     ActiveRecord::Base.transaction do
+      # レシピの更新
       food.update!(food_params)
-
       # タグのidを渡す
       food.tag_ids = food_tags
-
-      # 翻訳する値を格納する配列
-      @translate_array = []
-
-      # レシピの材料を全て削除して再度データを作り直す
+      # レシピの材料を全て削除
       food.ingredients.destroy_all
-      ingredients.each do |ingredient|
-        food_ingredient = food.ingredients.create!(ingredient_params(ingredient))
-        # 翻訳に使う値を取り出して格納
-        @translate_array.push(food_ingredient[:quantity], food_ingredient[:ingredient_name])
-      end
-
-      # 翻訳する処理を実行
-      translated_ingredients = google_translation(@translate_array)
-      # 翻訳したデータを使ってマクロ栄養素を算出
-      nutrition_data = nutrition_calculate(translated_ingredients)
-      # 投稿されたレシピのマクロ栄養素として保存
-      food.create_nutrition!(nutrition_data)
+      # 材料の作成とマクロp栄養素の計算
+      ingredients_and_nutrition(food)
 
       true
     end
@@ -148,6 +119,23 @@ class FoodForm
       end
     end
     errors.uniq!
+  end
+
+  def ingredients_and_nutrition(food)
+    # 翻訳する値を格納する配列
+    translate_array = []
+    ingredients.each do |ingredient|
+      food_ingredient = food.ingredients.create!(ingredient_params(ingredient))
+      # 翻訳に使う値を取り出して格納
+      translate_array.push(food_ingredient[:quantity], food_ingredient[:ingredient_name])
+    end
+
+    # 翻訳する処理を実行
+    translated_ingredients = google_translation(translate_array)
+    # 翻訳したデータを使ってマクロ栄養素を算出
+    nutrition_data = nutrition_calculate(translated_ingredients)
+    # 投稿されたレシピのマクロ栄養素として保存
+    food.create_nutrition!(nutrition_data)
   end
 
   def google_translation(*ingredients)
