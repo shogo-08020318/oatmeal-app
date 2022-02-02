@@ -16,7 +16,10 @@
       </p>
       <div>
         <%= link_to edit_food_path(food.uuid) do %>
-          <i class="fas fa-edit mr-2"></i>
+          <i class="fas fa-pencil-alt mr-2 text-green-700"></i>
+        <% end %>
+        <%= link_to food_path(food.uuid), method: :delete do %>
+          <i class="fas fa-trash-alt mr-2 text-red-700"></i>
         <% end %>
       </div>
   </div>

@@ -38,6 +38,13 @@ class FoodsController < ApplicationController
     end
   end
 
+  def destroy
+    binding.pry
+    food = Food.find_by(uuid: params[:uuid])
+    food.destroy!
+    redirect_to foods_path
+  end
+
   private
 
   def food_params
