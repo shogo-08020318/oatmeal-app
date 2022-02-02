@@ -40,8 +40,10 @@
       <div>
         <%= f.label '材料', class: "text-gray-800 font-semibold block my-3 text-md" %>
         <div id='js-media-form'>
-          <% @form.ingredients.each do |ingredient| %>
-            <%= render 'ingredients_form', f: f, ingredient: ingredient %>
+          <% if @form.ingredients.present? %>
+            <% @form.ingredients.each do |ingredient| %>
+              <%= render 'ingredients_form', f: f, ingredient: ingredient %>
+            <% end %>
           <% end %>
         </div>
         <div class='my-2'>
