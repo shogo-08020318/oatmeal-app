@@ -27,3 +27,10 @@ ja:
     create:
       success: レシピを投稿しました。
       fail: レシピの投稿に失敗しました。
+    edit:
+      title: レシピ編集
+    update:
+      success: レシピを更新しました。
+      fail: レシピの更新に失敗しました。
+    destroy:
+      success: レシピを削除しました。
