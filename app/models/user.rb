@@ -26,4 +26,8 @@ class User < ApplicationRecord
 
   # ユーザー保存直前にuuidを生成
   before_create -> { self.uuid = SecureRandom.uuid }
+
+  def mine?(object)
+    id == object.user_id
+  end
 end
