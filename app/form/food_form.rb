@@ -15,21 +15,14 @@ class FoodForm
     super(attributes)
   end
 
-  def ingredients_attributes=(attributes)
-    self.ingredients = attributes.map do |_, ingredient_attribute|
-      Ingredient.new(ingredient_attribute)
-    end
-  end
-
   def save
     return false if invalid?
 
     ActiveRecord::Base.transaction do
-      # レシピの作成
       food = Food.create!(food_params)
       # タグのidを渡す
       food.tag_ids = food_tags
-      # 材料の作成とマクロp栄養素の計算
+      # 材料の作成とマクロ栄養素の計算
       ingredients_and_nutrition(food)
       true
     end
@@ -42,13 +35,9 @@ class FoodForm
     return false if invalid?
 
     ActiveRecord::Base.transaction do
-      # レシピの更新
       food.update!(food_params)
-      # タグのidを渡す
       food.tag_ids = food_tags
-      # レシピの材料を全て削除
       food.ingredients.destroy_all
-      # 材料の作成とマクロp栄養素の計算
       ingredients_and_nutrition(food)
 
       true
@@ -91,14 +80,6 @@ class FoodForm
     }
   end
 
-  def ingredient_params(ingredient)
-    {
-      ingredient_name: ingredient[:ingredient_name],
-      quantity: ingredient[:quantity],
-      proper_quantity: ingredient[:proper_quantity]
-    }
-  end
-
   def food_validate
     food = Food.new(food_params)
     return if food.valid?
@@ -111,7 +92,7 @@ class FoodForm
   def ingredient_validate
     food = Food.new(food_params)
     ingredients.each do |i|
-      ingredient = food.ingredients.build(ingredient_params(i))
+      ingredient = food.ingredients.build(i)
       next if ingredient.valid?
 
       ingredient.errors.each do |at, er|
@@ -125,9 +106,10 @@ class FoodForm
     # 翻訳する値を格納する配列
     translate_array = []
     ingredients.each do |ingredient|
-      food_ingredient = food.ingredients.create!(ingredient_params(ingredient))
+      # ingredientは、{"ingredient_name"=>"砂糖", "quantity"=>"", "proper_quantity"=>"true"} or {"ingredient_name"=>"ヨーグルト", "quantity"=>"30g"} のようか形で入っている
+      food_ingredient = food.ingredients.create!(ingredient)
       # 翻訳に使う値を取り出して格納
-      translate_array.push(food_ingredient[:quantity], food_ingredient[:ingredient_name])
+      translate_array.push(food_ingredient[:quantity], food_ingredient[:ingredient_name]) if food_ingredient[:quantity].present?
     end
 
     # 翻訳する処理を実行
