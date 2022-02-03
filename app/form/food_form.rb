@@ -2,54 +2,43 @@ class FoodForm
   include ActiveModel::Model
   require 'google/cloud/translate'
 
-  DEFAULT_INGREDIENT_COUNT = 3
-
-  attr_accessor :name, :image, :recipe, :cooking_comment, :cooking_time, :cooking_time_unit, :serving, :user_id, :food_tags, :food_id, :tag_id, :ingredients, :ingredient_name, :quantity, :proper_quantity
+  attr_accessor :food, :name, :image, :recipe, :cooking_comment, :cooking_time, :cooking_time_unit, :serving, :user_id, :food_tags, :food_id, :tag_id, :ingredients, :ingredient_name, :quantity, :proper_quantity
 
   validate :food_validate
   validate :ingredient_validate
 
-  def initialize(attributes = nil, food: Food.new, food_tag: FoodTag.new)
-    @food = food
-    @food_tag = food_tag
-    self.ingredients = DEFAULT_INGREDIENT_COUNT.times.map { Ingredient.new } unless ingredients.present?
-    super(attributes)
-  end
+  delegate :persisted?, to: :@food
 
-  def ingredients_attributes=(attributes)
-    self.ingredients = attributes.map do |_, ingredient_attribute|
-      Ingredient.new(ingredient_attribute)
-    end
+  def initialize(attributes = nil, food: Food.new)
+    @food = food
+    attributes ||= default_attributes
+    super(attributes)
   end
 
   def save
     return false if invalid?
 
     ActiveRecord::Base.transaction do
-      food = Food.new(food_params)
-      food.save!
+      food = Food.create!(food_params)
+      # タグのidを渡す
+      food.tag_ids = food_tags
+      # 材料の作成とマクロ栄養素の計算
+      ingredients_and_nutrition(food)
+      true
+    end
+  rescue StandardError => e
+    p e
+    false
+  end
 
-      if food_tags.present?
-        food_tags.each do |food_tag|
-          food.food_tags.create!(tag_id: food_tag)
-        end
-      end
+  def update
+    return false if invalid?
 
-      # 翻訳する値を格納する配列
-      @translate_array = []
-
-      ingredients.each do |ingredient|
-        food_ingredient = food.ingredients.create!(ingredient_params(ingredient))
-        # 翻訳に使う値を取り出して格納
-        @translate_array.push(food_ingredient[:quantity], food_ingredient[:ingredient_name])
-      end
-
-      # 翻訳する処理を実行
-      translated_ingredients = google_translation(@translate_array)
-      # 翻訳したデータを使ってマクロ栄養素を算出
-      nutrition_data = nutrition_calculate(translated_ingredients)
-      # 投稿されたレシピのマクロ栄養素として保存
-      food.create_nutrition!(nutrition_data)
+    ActiveRecord::Base.transaction do
+      food.update!(food_params)
+      food.tag_ids = food_tags
+      food.ingredients.destroy_all
+      ingredients_and_nutrition(food)
 
       true
     end
@@ -58,7 +47,25 @@ class FoodForm
     false
   end
 
+  def to_model
+    @food
+  end
+
   private
+
+  def default_attributes
+    {
+      name: @food.name,
+      image: @food.image,
+      recipe: @food.recipe,
+      cooking_comment: @food.cooking_comment,
+      cooking_time: @food.cooking_time,
+      cooking_time_unit: @food.cooking_time_unit,
+      serving: @food.serving,
+      food_tags: @food.tags,
+      ingredients: @food.ingredients
+    }
+  end
 
   def food_params
     {
@@ -70,14 +77,6 @@ class FoodForm
       cooking_time_unit: cooking_time_unit,
       serving: serving,
       user_id: user_id
-    }
-  end
-
-  def ingredient_params(ingredient)
-    {
-      ingredient_name: ingredient.ingredient_name,
-      quantity: ingredient.quantity,
-      proper_quantity: ingredient.proper_quantity
     }
   end
 
@@ -93,7 +92,7 @@ class FoodForm
   def ingredient_validate
     food = Food.new(food_params)
     ingredients.each do |i|
-      ingredient = food.ingredients.build(ingredient_params(i))
+      ingredient = food.ingredients.build(i)
       next if ingredient.valid?
 
       ingredient.errors.each do |at, er|
@@ -101,6 +100,24 @@ class FoodForm
       end
     end
     errors.uniq!
+  end
+
+  def ingredients_and_nutrition(food)
+    # 翻訳する値を格納する配列
+    translate_array = []
+    ingredients.each do |ingredient|
+      # ingredientは、{"ingredient_name"=>"砂糖", "quantity"=>"", "proper_quantity"=>"true"} or {"ingredient_name"=>"ヨーグルト", "quantity"=>"30g"} のようか形で入っている
+      food_ingredient = food.ingredients.create!(ingredient)
+      # 翻訳に使う値を取り出して格納
+      translate_array.push(food_ingredient[:quantity], food_ingredient[:ingredient_name]) if food_ingredient[:quantity].present?
+    end
+
+    # 翻訳する処理を実行
+    translated_ingredients = google_translation(translate_array)
+    # 翻訳したデータを使ってマクロ栄養素を算出
+    nutrition_data = nutrition_calculate(translated_ingredients)
+    # 投稿されたレシピのマクロ栄養素として保存
+    food.create_nutrition!(nutrition_data)
   end
 
   def google_translation(*ingredients)

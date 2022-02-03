@@ -23,7 +23,7 @@ ja:
         name: タグ
       ingredient:
         ingredient_name: 材料名
-        quantity: 材料の量
+        quantity: 量
         proper_quantity: 適量
   activemodel:
     attributes:
@@ -38,7 +38,7 @@ ja:
         tag: タグ
         ingredient: 材料
         ingredient_name: 材料名
-        quantity: 材料の量
+        quantity: 量
         proper_quantity: 適量
   enums:
     food:

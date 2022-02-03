@@ -1,0 +1,23 @@
+<div class="js-remove-ingredient-form border border-orange-400 rounded-xl p-4 mb-3">
+  <%= f.fields_for 'ingredients[]', Ingredient.new, {} do |i| %>
+    <div class="grid grid-cols-6 gap-4">
+      <div class="col-span-3">
+        <%= i.label :ingredient_name,class: "text-gray-800 font-semibold block my-3 text-sm" %>
+        <%= i.text_field :ingredient_name, value: ingredient[:ingredient_name], class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+      </div>
+      <div>
+        <%= i.label :quantity, class: "text-gray-800 font-semibold block my-3 text-sm" %>
+        <%= i.text_field :quantity, value: ingredient[:quantity], class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+      </div>
+      <div class="text-center">
+        <%= i.label :proper_quantity, class: "text-gray-800 font-semibold block my-3 text-sm" %>
+        <%= i.check_box :proper_quantity, {checked: ingredient[:proper_quantity], class:"w-1/3 h-1/3 mt-1"}, true, false  %>
+      </div>
+      <div class="mt-5">
+        <div class='my-3' onclick='removeMediumForm(event)'>
+          <p class="text-center cursor-pointer text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-6">削除</p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
