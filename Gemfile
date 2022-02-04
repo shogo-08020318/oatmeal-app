@@ -59,7 +59,7 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'tzinfo-data'
 
 # ユーザー認証
 gem 'sorcery'
@@ -89,3 +89,6 @@ gem 'google-cloud-translate'
 # グラフ
 gem 'chart-js-rails'
 gem 'gon'
+
+# デコレータ
+gem 'draper'
