@@ -61,7 +61,7 @@
                 <div class="p-2">
                   <ul class="list-disc list-inside">
                     <% @food.ingredients.each do |ingredient| %>
-                      <li><%= ingredient.ingredient_name %> : <%= ingredient.quantity %></li>
+                      <li><%= ingredient.ingredient_name %> : <%= ingredient.decorate.proper_quantity? %></li>
                     <% end %>
                   </ul>
                 </div>
