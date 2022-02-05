@@ -35,7 +35,12 @@ class FoodForm
     return false if invalid?
 
     ActiveRecord::Base.transaction do
-      food.update!(food_params)
+      # パラメータを一度別の変数に代入
+      food_form_params = food_params
+      # 送信されたパラメータにimageが存在しなければ元の画像のデータを渡す
+      # imageのパラメータが送信されればその値が使われる
+      food_form_params[:image] = food.image if food_params[:image].nil?
+      food.update!(food_form_params)
       food.tag_ids = food_tags
       food.ingredients.destroy_all
       ingredients_and_nutrition(food)
