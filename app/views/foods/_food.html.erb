@@ -15,7 +15,7 @@
         <i class="fas fa-user-alt"></i><%= link_to food.user.name, user_path(food.user.uuid) %>
       </p>
       <div>
-        <% if current_user.mine?(food) %>
+        <% if current_user&.mine?(food) %>
           <%= render 'update_destroy', food: food  %>
         <% end %>
       </div>
