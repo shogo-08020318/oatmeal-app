@@ -13,7 +13,8 @@
       </div>
       <div>
       	<%= f.label :image, class: "text-gray-800 font-semibold block my-3 text-md" %>
-			  <%= f.file_field :image, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+			  <%= f.file_field :image, onchange: 'previewImage()', class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" %>
+        <%= image_tag @form.food.image_url, class: 'p-3 mt-3 border-2 border-orange-400 bg-yellow-50 rounded-lg', id: 'preview', size: "300x400" %>
       </div>
       <div>
       	<%= f.label :cooking_comment, class: "text-gray-800 font-semibold block my-3 text-md" %>
@@ -66,3 +67,20 @@
     <% end %>
 	</div>
 </div>
+
+<script>
+function previewImage() {
+    const target = this.event.target;
+    const file = target.files[0];
+    const reader  = new FileReader();
+    reader.onloadend = function () {
+        const preview = document.querySelector("#preview")
+        if(preview) {
+            preview.src = reader.result;
+        }
+    }
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+</script>

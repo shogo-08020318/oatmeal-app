@@ -1,5 +1,6 @@
 class FoodsController < ApplicationController
   before_action :get_food, only: %i[edit update destroy]
+  skip_before_action :require_login, only: %i[index show]
 
   def index
     @foods = Food.all.includes(:user, :tags).order(created_at: :desc)

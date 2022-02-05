@@ -13,7 +13,7 @@
             <%= link_to @food.user.name, user_path(@food.user.uuid), class: "text-3xl" %>
           </div>
           <div class="pl-5 text-2xl">
-            <% if current_user.mine?(@food) %>
+            <% if current_user&.mine?(@food) %>
               <%= render 'update_destroy', food: @food  %>
             <% end %>          
           </div>
