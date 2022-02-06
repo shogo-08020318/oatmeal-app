@@ -8,7 +8,7 @@ CarrierWave.configure do |config|
     config.storage :fog
     config.fog_provider = 'fog/aws'
     # バケット名
-    config.fog_directory  = 'oatmeal-app'
+    config.fog_directory = 'oatmeal-app'
     config.fog_public = false
     config.fog_credentials = {
       provider: 'AWS',
