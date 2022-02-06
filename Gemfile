@@ -92,3 +92,6 @@ gem 'gon'
 
 # デコレータ
 gem 'draper'
+
+# AWS S3
+gem 'fog-aws'
