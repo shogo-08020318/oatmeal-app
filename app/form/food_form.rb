@@ -127,7 +127,7 @@ class FoodForm
 
   def google_translation(*ingredients)
     project_id = Rails.application.credentials.google[:CLOUD_PROJECT_ID]
-    translate = Google::Cloud::Translate.new version: :v2, project_id: project_id, credentials: Rails.application.credentials.google[:GOOGLE_APPLICATION_CREDENTIALS]
+    translate = Google::Cloud::Translate.new version: :v2, project_id: project_id, credentials: Rails.application.credentials.google[:SERVICE_ACCOUNT]
     target = 'en'
     text = ingredients
     translation = translate.translate(text, to: target)
