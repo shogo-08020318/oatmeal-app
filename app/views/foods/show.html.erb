@@ -1,24 +1,24 @@
 <div class="flex justify-center">
-  <div class="py-6 w-full px-5">
+  <div class="py-6 w-full px-2 lg:px-5">
     <!-- Image gallery -->
-    <div class="bg-white pt-6 pb-3 m-7 rounded-2xl shadow-xl">
-      <h1 class="text-5xl text-center py-3 font-bold"><%= @food.name %></h1>
-      <div class="pl-10 pr-3 mt-6 mx-auto grid grid-cols-2 gap-x-8">
+    <div class="bg-white pt-6 pb-3 lg:m-7 rounded-2xl shadow-xl">
+      <h1 class="text-3xl lg:text-5xl text-center py-3 font-bold"><%= @food.name %></h1>
+      <div class="p-2 lg:pl-10 lg:pr-3 mt-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-x-8">
         <div>
           <div>
             <%= image_tag @food.image_url(:show), class: "w-full shadow-lg rounded-xl relative z-1 bg-orange-50 p-3" %>
           </div>
           <div class="p-5">
-            <p class="text-xl"><i class="fas fa-user-edit"></i>投稿者</p>
-            <%= link_to @food.user.name, user_path(@food.user.uuid), class: "text-3xl" %>
+            <p class="text-md lg:text-xl"><i class="fas fa-user-edit"></i>投稿者</p>
+            <%= link_to @food.user.name, user_path(@food.user.uuid), class: "text-xl lg:text-3xl" %>
           </div>
-          <div class="pl-5 text-2xl">
+          <div class="pl-5 text-lg lg:text-2xl">
             <% if current_user&.mine?(@food) %>
               <%= render 'update_destroy', food: @food  %>
             <% end %>          
           </div>
         </div>
-        <div class="flex flex-wrap" id="tabs-id">
+        <div class="flex flex-wrap mt-5 lg:mt-0" id="tabs-id">
           <div class="w-full">
             <ul class="flex mb-0 list-none flex-wrap flex-row">
               <li class="-mb-px last:mr-0 flex-auto text-center">
@@ -53,7 +53,7 @@
       <!-- Product info -->
       <div class="m-5 pt-4 border-t-2 border-gray-200 shadow-lg">
         <div class="bg-yellow-50">
-          <div class="grid grid-cols-2">
+          <div class="grid grid-cols-1 lg:grid-cols-2">
             <div>
               <!--材料 -->
               <div class="p-3">
