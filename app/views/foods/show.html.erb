@@ -70,7 +70,7 @@
               <div class="p-3">
                 <h1 class="text-2xl font-bold underline"><%= Food.human_attribute_name(:cooking_comment) %></h1>
                 <div class="p-2">
-                  <%= simple_format(@food.cooking_comment) %>
+                  <%= simple_format(@food.decorate.cooking_comment?) %>
                 </div>
               </div>
             </div>
@@ -88,8 +88,12 @@
           <div class="p-3">
             <h1 class="text-2xl font-bold underline"><%= Tag.model_name.human %></h1>
             <div class="flex justify-start pt-3">
-              <% @food.tags.each do |tag| %>
-                <p class="bg-orange-400 rounded-md text-orange-50 text-xl mr-3 px-4 py-1"><%= tag.name %></p>
+              <% if @food.tags.present? %>
+                <% @food.tags.each do |tag| %>
+                  <p class="bg-orange-400 rounded-md text-orange-50 text-xl mr-3 px-4 py-1"><%= tag.name %></p>
+                <% end %>
+              <% else %>
+                <p class="pl-2">なし</p>
               <% end %>
             </div>
           </div>
