@@ -34,9 +34,11 @@
       </div>
       <div>
       	<%= f.label 'タグ', class: "text-gray-800 font-semibold block my-3 text-md" %>
-			  <%= f.collection_check_boxes :food_tags, Tag.all, :id, :name, { checked: @food.tag_ids.map(&:to_param) }, class: "bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" do |b| %>
-          <%= b.label(class: "bg-yellow-100 border-2 rounded-md border-orange-500 text-orange-500 mr-2 px-2 active:bg-red-600") { b.check_box + b.text } %>
-        <% end %>
+        <div class="flex flex-col lg:flex-row">
+          <%= f.collection_check_boxes :food_tags, Tag.all, :id, :name, { checked: @food.tag_ids.map(&:to_param) }, class: "bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" do |b| %>
+            <%= b.label(class: "w-1/2 lg:w-1/6 bg-yellow-100 border-2 rounded-md border-orange-500 text-orange-500 mr-2 px-2 mb-4 active:bg-red-600") { b.check_box + b.text } %>
+          <% end %>
+        </div>
       </div>
       <div>
         <%= f.label '材料', class: "text-gray-800 font-semibold block mt-3 text-md" %><p class="text-sm text-red-500">※必須</p>
@@ -50,7 +52,7 @@
         </div>
       </div>
       <div class="text-center">
-        <%= f.submit class: "w-1/4 mt-6 bg-orange-400 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans" %>
+        <%= f.submit class: "w-1/2 lg:w-1/4 mt-6 bg-orange-400 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans" %>
       </div>
 
       <script type="text/javascript">
