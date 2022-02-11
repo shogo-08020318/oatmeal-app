@@ -8,8 +8,8 @@ class FoodsController < ApplicationController
 
   def show
     @food = Food.find_by(uuid: params[:uuid])
-    gon.nutrition = @food.nutrition
-    gon.nutrition_calories = @food.nutrition.calorie_calculates
+    gon.nutrition = @food.nutrition.nutrition_calculates(@food.serving)
+    gon.nutrition_calories = @food.nutrition.calorie_calculates(@food.serving)
   end
 
   def new
