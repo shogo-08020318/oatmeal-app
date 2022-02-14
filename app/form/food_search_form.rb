@@ -1,14 +1,12 @@
 class FoodSearchForm
   include ActiveModel::Model
-  include ActiveModel::Attributes
 
-  # attr_accessor :word
-  attribute :name, :string
+  attr_accessor :name
 
   def search
-    foods = Food.all
+    foods = Food.distinct.joins(:ingredients)
 
-    # レシピ名内で検索
-    foods.in_name(name)
+    # レシピ名と材料名から検索
+    foods.in_name(name).or(foods.in_ingredients(name))
   end
 end
