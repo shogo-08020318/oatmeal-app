@@ -29,4 +29,7 @@ class Food < ApplicationRecord
 
   # 投稿の保存直前にuuidを生成
   before_create -> { self.uuid = SecureRandom.uuid }
+
+  # レシピ名に含まれているか
+  scope :in_name, ->(name) { where('name LIKE ?', "%#{name}%") }
 end

@@ -3,7 +3,9 @@ class FoodsController < ApplicationController
   skip_before_action :require_login, only: %i[index show]
 
   def index
-    @foods = Food.all.includes(:user, :tags).order(created_at: :desc)
+    # @foods = Food.all.includes(:user, :tags).order(created_at: :desc)
+    @food_search_form = FoodSearchForm.new(search_params)
+    @foods = @food_search_form.search.includes(:user, :tags).order(created_at: :desc)
   end
 
   def show
@@ -53,5 +55,10 @@ class FoodsController < ApplicationController
 
   def get_food
     @food = current_user.foods.find_by(uuid: params[:uuid])
+  end
+
+  def search_params
+    # 入力されてない場合を考慮してnilガード、入力されていればそのまま実行
+    params[:q]&.permit(:name)
   end
 end
