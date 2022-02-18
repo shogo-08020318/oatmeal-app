@@ -59,6 +59,6 @@ class FoodsController < ApplicationController
 
   def search_params
     # 入力されてない場合を考慮してnilガード、入力されていればそのまま実行
-    params[:q]&.permit(:name)
+    params[:q]&.permit(:name, :ingredient_name, :not_ingredient_name)
   end
 end

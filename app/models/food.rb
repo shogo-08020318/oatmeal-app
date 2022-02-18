@@ -33,6 +33,7 @@ class Food < ApplicationRecord
   # レシピ名に限定
   scope :in_name, ->(name) { where('name LIKE ?', "%#{name}%") }
   # 材料名に限定
-  # scope :in_ingredients, ->(name) { joins(:ingredients).where('ingredients.ingredient_name like ?', "%#{name}%") }
   scope :in_ingredients, ->(name) { where('ingredients.ingredient_name like ?', "%#{name}%") }
+  # 特定の材料を含まない
+  scope :not_ingredients, ->(not_ingredient_name) { where.not(id: Ingredient.distinct.where('ingredient_name like ?', "%#{not_ingredient_name}%").pluck(:food_id)) }
 end
