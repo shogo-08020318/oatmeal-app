@@ -39,6 +39,15 @@ class FoodSearchForm
     # 脂質検索（以下）
     foods = foods.under_fat(under_fat) if under_fat.present?
 
+    # タグ検索
+    if food_tags.present?
+      food_tags.each do |tag|
+        food_ids = []
+        foods.each { |food| food_ids << food.id if food.tag_ids.include?(tag.to_i) }
+        foods = foods.where(id: food_ids)
+      end
+    end
+
     foods
   end
 end
