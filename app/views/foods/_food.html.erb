@@ -1,6 +1,8 @@
 <div class="bg-white max-w-sm rounded overflow-hidden shadow-lg">
   <div class= "w-full my-3">
-    <%= image_tag food.image_url(:thumb), class: "w-11/12 shadow-lg mx-auto" %>
+    <%= link_to food_path(food.uuid) do %>
+      <%= image_tag food.image_url(:thumb), class: "w-11/12 shadow-lg mx-auto" %>
+    <% end %>
   </div>
   <div class="px-6 pb-4">
     <div class="font-bold text-xl mb-2">
@@ -19,7 +21,7 @@
   </div>
   <div class="px-6 pb-2 mt-2">
     <% food.tags.each do |tag| %>
-      <span class="inline-block bg-orange-400 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"><%= tag.name %></span>
+      <%= link_to tag.name, foods_path(q: { food_tags: [tag.id] }), class: "inline-block bg-orange-400 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2" %>
     <% end %>
   </div>
 </div>
