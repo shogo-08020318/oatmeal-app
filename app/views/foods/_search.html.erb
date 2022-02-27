@@ -1,0 +1,145 @@
+<div class="bg-white shadow-md">
+  <div class="mx-auto w-1/3">
+    <div class="flex justify-center py-1">
+      <div class="flex h-8 mt-2">
+        <%= form_with model: @food_search_form, scope: :q, url: foods_path, method: :get, local: true do |f| %>
+          <%= f.search_field :name, placeholder: 'キーワード', class: "px-4 bg-white border border-orange-500 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+          <%= f.button :type => "submit", class: "text-white bg-orange-500 px-5 rounded-lg border border-orange-500" do %>
+            <i class="fas fa-search"></i>
+          <% end %>
+          <button class="text-gray-600 active:bg-orange-600 font-bold uppercase text-sm px-6 py-1 rounded underline hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
+            詳細検索
+          </button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="modal-id">
+  <div class="relative w-auto my-6 mx-auto w-4/5 overflow-y-auto h-5/6">
+    <!--content-->
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-yellow-50 outline-none focus:outline-none">
+      <!--header-->
+      <div class="flex justify-center p-5 rounded-t">
+        <h3 class="text-3xl font-semibold text-gray-600">
+          詳細検索
+        </h3>
+      </div>
+      <!--search body-->
+      <div>
+        <div class="relative lg:px-6">
+          <%= form_with model: @food_search_form, scope: :q, url: foods_path, method: :get, local: true do |f| %>
+            <div class="flex flex-col px-7 pt-2 border-t border-yellow-400">
+              <div class="grid grid-cols-1 lg:grid-cols-3">
+                <div>
+                  <div class="flex flex-col mb-3">
+                    <%= f.label 'フリーワード', class: "text-gray-600 font-semibold mb-2 underline" %>
+                    <%= f.search_field :name, placeholder: 'キーワード', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                  </div>
+                  <div class="flex flex-col mb-3">
+                    <%= f.label '材料', class: "text-gray-600 font-semibold mb-2 underline" %>
+                    <div class="flex mb-2">
+                      <%= f.search_field :ingredient_name, placeholder: '材料名', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                      <p class="pl-1">を含む</p>
+                    </div>
+                    <div class="flex">
+                      <%= f.search_field :not_ingredient_name, placeholder: '材料名', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                      <p class="pl-1">を含まない</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-2">
+                  <div class="flex flex-col">
+                    <%= f.label 'カロリー・マクロ栄養素', class: "text-gray-600 font-semibold mb-2 underline" %>
+                    <div class="flex flex-col mb-3">
+                      <div>
+                        <div class="grid grid-cols-1 lg:grid-cols-10">
+                          <%= f.label 'カロリー', class: "col-span-2 mr-2" %>
+                          <div class="flex mb-2 col-span-4">
+                            <%= f.search_field :over_calories, placeholder: '100', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <p class="pl-1">kcal以上</p>
+                          </div>
+                          <div class="flex mb-2 col-span-4">
+                            <%= f.search_field :under_calories, placeholder: '200', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <p class="pl-1">kcal以下</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="grid grid-cols-1 lg:grid-cols-10">
+                          <%= f.label '炭水化物', class: "col-span-2 mr-2" %>
+                          <div class="flex mb-2 col-span-4">
+                            <%= f.search_field :over_carbo, placeholder: '0', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <p class="pl-1">g以上</p>
+                          </div>
+                          <div class="flex mb-2 col-span-4">
+                            <%= f.search_field :under_carbo, placeholder: '50', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <p class="pl-1">g以下</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="grid grid-cols-1 lg:grid-cols-10">
+                          <%= f.label 'たんぱく質', class: "col-span-2 mr-2" %>
+                          <div class="flex mb-2 col-span-4">
+                            <%= f.search_field :over_protein, placeholder: '0', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <p class="pl-1">g以上</p>
+                          </div>
+                          <div class="flex mb-2 col-span-4">
+                            <%= f.search_field :under_protein, placeholder: '50', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <p class="pl-1">g以下</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="grid grid-cols-1 lg:grid-cols-10">
+                          <%= f.label '脂質', class: "col-span-2 mr-2" %>
+                          <div class="flex mb-2 col-span-4">
+                            <%= f.search_field :over_fat, placeholder: '0', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <p class="pl-1">g以上</p>
+                          </div>
+                          <div class="flex mb-2 col-span-4">
+                            <%= f.search_field :under_fat, placeholder: '50', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <p class="pl-1">g以下</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <%= f.label 'タグ', class: "text-gray-600 font-semibold underline" %>
+                <div class="flex flex-wrap gap-2 py-2">
+                  <%= f.collection_check_boxes :food_tags, Tag.all, :id, :name, include_hidden: false, class: "bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" do |b| %>
+                    <%= b.label(class: "w-1/3 lg:w-1/6 bg-yellow-100 border-2 rounded-md border-orange-500 text-orange-500 mr-1 pl-1 mb-1 lg:mb-2") { b.check_box + b.text } %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="flex justify-center border-t border-yellow-400 pt-2">
+                <%= f.submit '検索', class: "cursor-pointer w-1/2 lg:w-1/6 text-white text-lg bg-orange-500 px-3 rounded-lg border border-orange-500 my-2 py-1" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <!--footer-->
+      <div class="flex items-center justify-end pr-2 pb-2 rounded-b">
+        <button class="text-white bg-red-500 rounded-md font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
+          ×閉じる
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+
+<script type="text/javascript">
+  function toggleModal(modalID){
+    document.getElementById(modalID).classList.toggle("hidden");
+    document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+    document.getElementById(modalID).classList.toggle("flex");
+    document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+  }
+</script>

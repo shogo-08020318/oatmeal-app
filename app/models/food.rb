@@ -29,4 +29,27 @@ class Food < ApplicationRecord
 
   # 投稿の保存直前にuuidを生成
   before_create -> { self.uuid = SecureRandom.uuid }
+
+  # レシピ名に限定
+  scope :in_name, ->(name) { where('name LIKE ?', "%#{name}%") }
+  # 材料名に限定
+  scope :in_ingredients, ->(name) { where('ingredients.ingredient_name like ?', "%#{name}%") }
+  # 特定の材料を含まない
+  scope :not_ingredients, ->(not_ingredient_name) { where.not(id: Ingredient.distinct.where('ingredient_name like ?', "%#{not_ingredient_name}%").pluck(:food_id)) }
+  # カロリーで検索（以上）
+  scope :over_calories, ->(over_calories) { where('nutritions.calories >= ?', over_calories) }
+  # カロリーで検索（以下）
+  scope :under_calories, ->(under_calories) { where('nutritions.calories <= ?', under_calories) }
+  # 炭水化物で検索（以上）
+  scope :over_carbo, ->(over_carbo) { where('nutritions.carbo >= ?', over_carbo) }
+  # 炭水化物で検索（以下）
+  scope :under_carbo, ->(under_carbo) { where('nutritions.carbo <= ?', under_carbo) }
+  # たんぱく質で検索（以上）
+  scope :over_protein, ->(over_protein) { where('nutritions.protein >= ?', over_protein) }
+  # たんぱく質で検索（以下）
+  scope :under_protein, ->(under_protein) { where('nutritions.protein <= ?', under_protein) }
+  # 脂質で検索（以上）
+  scope :over_fat, ->(over_fat) { where('nutritions.fat >= ?', over_fat) }
+  # 脂質で検索（以下）
+  scope :under_fat, ->(under_fat) { where('nutritions.fat <= ?', under_fat) }
 end
