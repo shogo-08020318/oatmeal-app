@@ -3,7 +3,6 @@ class FoodsController < ApplicationController
   skip_before_action :require_login, only: %i[index show]
 
   def index
-    # @foods = Food.all.includes(:user, :tags).order(created_at: :desc)
     @food_search_form = FoodSearchForm.new(search_params)
     @foods = @food_search_form.search.includes(:user, :tags).order(created_at: :desc)
   end
