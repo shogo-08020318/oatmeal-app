@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  # アップローダークラスとモデルの紐付け
+  mount_uploader :avatar, AvatarUploader
+
   # ユーザーが複数の投稿を所持する
   has_many :foods, dependent: :destroy
 

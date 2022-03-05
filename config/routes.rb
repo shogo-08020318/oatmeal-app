@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   resources :users, param: :uuid, only: %i[new show create]
   resources :foods, param: :uuid, only: %i[index show new create edit update destroy]
+
+  resource :profile, only: %i[show edit update]
 end

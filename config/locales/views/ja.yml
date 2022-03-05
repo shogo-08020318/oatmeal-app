@@ -35,3 +35,12 @@ ja:
       fail: レシピの更新に失敗しました。
     destroy:
       success: レシピを削除しました。
+  profiles:
+    show:
+      title: マイページ
+      update: 編集
+    edit:
+      title: プロフィール編集
+    update:
+      success: プロフィールを更新しました。
+      fail: プロフィールの更新に失敗しました。
