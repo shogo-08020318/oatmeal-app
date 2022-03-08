@@ -14,6 +14,9 @@ class Food < ApplicationRecord
   # レシピは対して必ずマクロ栄養素のデータを持つ
   has_one :nutrition, dependent: :destroy
 
+  # foodは複数お気に入り登録される
+  has_many :favorites, dependent: :destroy
+
   with_options presence: true do
     validates :name
     # 作り方の文字数を制限

@@ -4,5 +4,5 @@ class Favorite < ApplicationRecord
   belongs_to :food
 
   # userとfoodの組み合わせは一意である
-  validates :user_id, uniqueness: { scope: :diary_id }
+  validates :user_id, uniqueness: { scope: :food_id }
 end

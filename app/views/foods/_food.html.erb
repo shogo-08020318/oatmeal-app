@@ -16,6 +16,8 @@
       <div>
         <% if current_user&.mine?(food) %>
           <%= render 'update_destroy', food: food  %>
+        <% else %>
+          <%= render 'favorites/favorite_button', food: food  %>
         <% end %>
       </div>
   </div>
