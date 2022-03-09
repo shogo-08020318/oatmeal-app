@@ -5,6 +5,7 @@ ja:
       food: レシピ
       tag: タグ
       ingredient: 材料
+      favorite: お気に入り
     attributes:
       user:
         name: 名前

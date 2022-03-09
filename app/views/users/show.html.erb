@@ -15,12 +15,12 @@
               <ul class="flex mb-0 list-none flex-wrap flex-row">
                 <li class="-mb-px last:mr-0 flex-auto text-center">
                   <a class="text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-white bg-orange-400" onclick="changeAtiveTab(event,'tab-profile')">
-                    投稿一覧
+                    <%= t('.user_recipes') %>
                   </a>
                 </li>
                 <li class="-mb-px last:mr-0 flex-auto text-center">
                   <a class="text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-orange-400 bg-white" onclick="changeAtiveTab(event,'tab-settings')">
-                    お気に入り
+                    <%= Favorite.model_name.human %>
                   </a>
                 </li>
               </ul>
@@ -29,12 +29,24 @@
                   <div class="tab-content tab-space">
                     <div class="block" id="tab-profile">
                       <div class="p-5 overflow-y-auto h-96 bg-yellow-50">
-                        <%= render partial: 'user_food', collection: @user.foods %>
+                        <% if @user.foods.present? %>
+                          <%= render partial: 'user_food', collection: @user.foods %>
+                        <% else %>
+                          <div class="text-center text-xl text-gray-600">
+                            <%= t('.no_foods') %>                        
+                          </div>
+                        <% end %>
                       </div>
                     </div>
                     <div class="hidden" id="tab-settings">
                       <div class="p-5 overflow-y-auto h-96 bg-yellow-50">
-                        <%= render partial: 'user_food', collection: @user.favorite_foods %>
+                        <% if @user.favorite_foods.present? %>
+                          <%= render partial: 'user_food', collection: @user.favorite_foods %>
+                        <% else %>
+                          <div class="text-center text-xl text-gray-600">
+                            <%= t('.no_favorites') %>                        
+                          </div>
+                        <% end %>
                       </div>
                     </div>
                   </div>
