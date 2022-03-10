@@ -24,7 +24,9 @@
             </dd>
           </div>
           <div class="px-4 pt-8 pb-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6 border-t border-gray-200">
-            <dt class="opacity-0"></dt>
+            <dd class="mt-1 text-gray-900 sm:mt-0">
+              <%= link_to t('.user_show'), user_path(current_user.uuid), class: "text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg px-5 py-2.5 text-center m-4 mb-2" %>
+            </dd>
             <dd class="mt-1 text-gray-900 sm:mt-0">
               <%= link_to t('.update'), edit_profile_path, class: "text-white bg-gradient-to-r from-lime-400 via-lime-500 to-lime-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg px-5 py-2.5 text-center m-4 mb-2" %>
             </dd>

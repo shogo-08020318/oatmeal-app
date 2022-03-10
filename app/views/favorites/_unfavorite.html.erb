@@ -1,0 +1,6 @@
+<%= link_to favorite_path(current_user.favorites.find_by(food_id: food.id)),
+            id: "js-favorite-button-for-food-#{food.id}",
+            method: :delete,
+            remote: true do%>
+  <i class="fas fa-thumbs-up text-2xl mr-3 text-orange-600"></i>
+<% end %>

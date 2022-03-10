@@ -1,0 +1,14 @@
+<% if logged_in? %>
+  <%= link_to favorites_path(uuid: food.uuid),
+              id: "js-favorite-button-for-food-#{food.id}",
+              method: :post,
+              remote: true do%>
+    <i class="far fa-thumbs-up text-2xl mr-3 text-orange-600"></i>
+  <% end %>
+<% else %>
+  <%= link_to favorites_path(uuid: food.uuid),
+              id: "js-favorite-button-for-food-#{food.id}",
+              method: :post do%>
+    <i class="far fa-thumbs-up text-2xl mr-3 text-orange-600"></i>
+  <% end %>
+<% end %>

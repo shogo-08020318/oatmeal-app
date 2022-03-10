@@ -7,6 +7,12 @@ class User < ApplicationRecord
   # ユーザーが複数の投稿を所持する
   has_many :foods, dependent: :destroy
 
+  # ユーザーは複数の投稿をお気に入り登録することができる
+  has_many :favorites, dependent: :destroy
+
+  # お気に入り登録している
+  has_many :favorite_foods, through: :favorites, source: :food
+
   # パスワードは半角アルファベット（大文字・小文字・数値）
   VALID_PASSWORD_REGEX = /\A[a-zA-Z0-9]+\z/.freeze
 
@@ -30,7 +36,23 @@ class User < ApplicationRecord
   # ユーザー保存直前にuuidを生成
   before_create -> { self.uuid = SecureRandom.uuid }
 
+  # レシピが自分のものか判別
   def mine?(object)
     id == object.user_id
+  end
+
+  # お気に入り登録する
+  def favorite(food)
+    favorite_foods << food
+  end
+
+  # お気に入り登録を解除する
+  def unfavorite(food)
+    favorite_foods.destroy(food)
+  end
+
+  # お気に入り登録されているか判別
+  def favorite?(food)
+    favorite_foods.include?(food)
   end
 end

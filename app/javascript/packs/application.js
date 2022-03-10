@@ -9,6 +9,7 @@ import "channels"
 import '@fortawesome/fontawesome-free/js/all'
 import "../src/application.scss"
 require('chart.js')
+require('jquery')
 
 Rails.start()
 ActiveStorage.start()
