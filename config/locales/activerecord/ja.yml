@@ -6,6 +6,7 @@ ja:
       tag: タグ
       ingredient: 材料
       favorite: お気に入り
+      comment: コメント
     attributes:
       user:
         name: 名前
@@ -27,6 +28,8 @@ ja:
         ingredient_name: 材料名
         quantity: 量
         proper_quantity: 適量
+      comment:
+        body: コメント
   activemodel:
     attributes:
       food_form:

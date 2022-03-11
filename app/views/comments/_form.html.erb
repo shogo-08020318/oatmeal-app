@@ -1,0 +1,5 @@
+<%= form_with model: comment, url: food_comments_path(food.uuid, comment), id: 'js-new-comment' do |f| %>
+  <%= f.label :body, class: 'block mb-2 text-xl font-medium text-gray-900 dark:text-gray-400' %>
+  <%= f.text_area :body, class: 'block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg focus:outline-none focus:ring focus:ring-orange-400 shadow h-24', id: 'js-new-comment-body', placeholder: '美味しかった！' %>
+  <%= f.submit 'コメントする', class: 'bg-orange-400 hover:bg-orange-500 text-orange-50 rounded-md px-2 py-1 my-3' %>
+<% end %>

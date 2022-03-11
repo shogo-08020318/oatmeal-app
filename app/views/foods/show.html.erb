@@ -1,7 +1,7 @@
 <div class="flex justify-center">
   <div class="py-6 w-full px-2 lg:px-5">
     <!-- Image gallery -->
-    <div class="bg-white pt-6 pb-3 lg:m-7 rounded-2xl shadow-xl">
+    <div class="bg-white pt-6 pb-3 lg:m-7 rounded-2xl shadow-lg">
       <h1 class="text-3xl lg:text-5xl text-center py-3 font-bold"><%= @food.name %></h1>
       <div class="p-2 lg:pl-10 lg:pr-3 mt-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-x-8">
         <div>
@@ -17,7 +17,7 @@
               <%= render 'update_destroy', food: @food  %>
             <% else %>
               <%= render 'favorites/favorite_button', food: @food  %>
-            <% end %>          
+            <% end %>
           </div>
         </div>
         <div class="flex flex-wrap mt-5 lg:mt-0" id="tabs-id">
@@ -108,6 +108,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="m-10 pt-7 border-t-2 border-orange-200">
+      <%= render 'comments/form', { food: @food, comment: @comment } %>
     </div>
   </div>
 </div>
