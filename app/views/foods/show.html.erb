@@ -110,7 +110,23 @@
       </div>
     </div>
     <div class="m-10 pt-7 border-t-2 border-orange-200">
-      <%= render 'comments/form', { food: @food, comment: @comment } %>
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <div class="mx-5 ">
+          <%= render 'comments/form', { food: @food, comment: @comment } %>
+        </div>
+        <div class="mx-5">
+          <div class="flex justify-between items-center mb-4">
+            <h5 class="text-xl font-bold leading-none text-gray-600 dark:text-white ml-5 pt-1">~みんなのコメント~</h5>
+          </div>
+          <div class="p-4 mx-5 bg-white rounded-lg shadow-md sm:p-8 dark:bg-gray-800">
+            <% if @comments.present? %>
+              <%= render 'comments/comments', comments: @comments %>
+            <% else %>
+              <p><%= t('.no_comment') %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -28,6 +28,8 @@ ja:
     index:
       title: レシピ一覧
       no_foods: 該当するレシピはありません。
+    show:
+      no_comment: コメントはありません。
     new:
       title: レシピ作成
     create:
@@ -54,3 +56,5 @@ ja:
     create:
       success: コメントしました。
       fail: コメントの投稿に失敗しました。
+    destroy:
+      success: コメントを削除しました。
