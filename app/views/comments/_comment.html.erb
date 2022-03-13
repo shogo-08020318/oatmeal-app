@@ -1,13 +1,11 @@
 <li id="comment-<%= comment.id %>">
-  <div class="py-3 sm:py-4">
+  <div class="py-3 sm:py-4 pr-2 lg:pr-4">
     <div class="flex items-center space-x-4">
       <div class="flex-shrink-0">
         <%= image_tag comment.user.avatar.url(:thumb), class: "w-8 h-8 mx-auto shadow-md rounded-full" %>
       </div>
       <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-          <%= comment.user.name %>
-        </p>
+        <%= link_to comment.user.name, user_path(@food.user.uuid), class: "text-sm font-medium text-gray-900 hover:text-orange-400 truncate dark:text-white" %>
         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
           <%= simple_format(comment.body) %>
         </p>
