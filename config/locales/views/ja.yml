@@ -6,6 +6,7 @@ ja:
     no_acount: アカウントをお持ちでない方はこちら
     already_acount: 既にアカウントお持ちの方はこちら
     require_login: ログインしてください
+    post: 投稿する
   users:
     new:
       title: 新規登録
