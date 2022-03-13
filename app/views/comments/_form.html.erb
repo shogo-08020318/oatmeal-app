@@ -1,0 +1,8 @@
+<%= form_with model: comment, url: food_comments_path(food.uuid, comment), id: 'js-new-comment', local: false do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+    <div class="flex flex-row text-xl text-gray-600 font-bold mb-1 text-center justify-center lg:justify-start">
+      <%= f.label :body, class: 'block mb-2 dark:text-gray-400' %><p>フォーム</p>
+    </div>
+    <%= f.text_area :body, class: 'block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg focus:outline-none focus:ring focus:ring-orange-400 shadow h-24', id: 'js-new-comment-body', placeholder: '美味しかった！' %>
+    <%= f.submit t('defaults.post'), class: 'flex bg-orange-400 hover:bg-orange-500 text-orange-50 rounded-md px-2 py-1 my-3 mx-auto lg:mx-0' %>
+<% end %>

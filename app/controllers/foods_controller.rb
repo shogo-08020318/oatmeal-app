@@ -11,6 +11,8 @@ class FoodsController < ApplicationController
     @food = Food.find_by(uuid: params[:uuid])
     gon.nutrition = @food.nutrition.nutrition_calculates(@food.serving)
     gon.nutrition_calories = @food.nutrition.calorie_calculates(@food.serving)
+    @comment = Comment.new
+    @comments = @food.comments.includes(:user).order(created_at: :desc)
   end
 
   def new

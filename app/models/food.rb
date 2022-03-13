@@ -17,6 +17,9 @@ class Food < ApplicationRecord
   # foodは複数お気に入り登録される
   has_many :favorites, dependent: :destroy
 
+  # レシピは複数のコメントを持つ
+  has_many :comments, dependent: :destroy
+
   with_options presence: true do
     validates :name
     # 作り方の文字数を制限

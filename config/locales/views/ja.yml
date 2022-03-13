@@ -6,6 +6,7 @@ ja:
     no_acount: アカウントをお持ちでない方はこちら
     already_acount: 既にアカウントお持ちの方はこちら
     require_login: ログインしてください
+    post: 投稿する
   users:
     new:
       title: 新規登録
@@ -28,6 +29,8 @@ ja:
     index:
       title: レシピ一覧
       no_foods: 該当するレシピはありません。
+    show:
+      no_comment: コメントはありません。
     new:
       title: レシピ作成
     create:
@@ -50,3 +53,9 @@ ja:
     update:
       success: プロフィールを更新しました。
       fail: プロフィールの更新に失敗しました。
+  comments:
+    create:
+      success: コメントしました。
+      fail: コメントの投稿に失敗しました。
+    destroy:
+      success: コメントを削除しました。

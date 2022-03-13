@@ -1,23 +1,25 @@
 <div class="flex justify-center">
   <div class="py-6 w-full px-2 lg:px-5">
     <!-- Image gallery -->
-    <div class="bg-white pt-6 pb-3 lg:m-7 rounded-2xl shadow-xl">
-      <h1 class="text-3xl lg:text-5xl text-center py-3 font-bold"><%= @food.name %></h1>
+    <div class="bg-white pt-6 pb-3 lg:m-7 rounded-2xl shadow-lg">
+      <h1 class="text-3xl lg:text-5xl text-gray-600 text-center py-3 font-bold"><%= @food.name %></h1>
       <div class="p-2 lg:pl-10 lg:pr-3 mt-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-x-8">
         <div>
           <div>
             <%= image_tag @food.image_url(:show), class: "w-full shadow-lg rounded-xl relative z-1 bg-orange-50 p-3" %>
           </div>
-          <div class="p-5">
-            <p class="text-md lg:text-xl"><i class="fas fa-user-edit"></i>投稿者</p>
-            <%= link_to @food.user.name, user_path(@food.user.uuid), class: "text-xl lg:text-3xl" %>
-          </div>
-          <div class="pl-5 text-lg lg:text-2xl">
-            <% if current_user&.mine?(@food) %>
-              <%= render 'update_destroy', food: @food  %>
-            <% else %>
-              <%= render 'favorites/favorite_button', food: @food  %>
-            <% end %>          
+          <div class="flex justify-between">
+            <div class="p-5">
+              <p class="text-md lg:text-xl"><i class="fas fa-user-edit"></i>投稿者</p>
+              <%= link_to @food.user.name, user_path(@food.user.uuid), class: "text-xl lg:text-3xl text-gray-900 hover:text-orange-400" %>
+            </div>
+            <div class="pl-5 text-lg lg:text-4xl pt-10">
+              <% if current_user&.mine?(@food) %>
+                <%= render 'update_destroy', food: @food  %>
+              <% else %>
+                <%= render 'favorites/favorite_button', food: @food  %>
+              <% end %>
+            </div>
           </div>
         </div>
         <div class="flex flex-wrap mt-5 lg:mt-0" id="tabs-id">
@@ -53,15 +55,15 @@
       </div>
 
       <!-- Product info -->
-      <div class="m-5 pt-4 border-t-2 border-gray-200 shadow-lg">
+      <div class="m-5 pt-4 border-t-2 border-gray-200 shadow-lg text-gray-600">
         <div class="bg-yellow-50">
           <div class="grid grid-cols-1 lg:grid-cols-2">
             <div>
               <!--材料 -->
               <div class="p-3">
-                <h1 class="text-2xl font-bold underline"><%= Ingredient.model_name.human %>（<%= @food.serving %>人前）</h1>
+                <h1 class="text-xl lg:text-2xl font-bold underline"><%= Ingredient.model_name.human %>（<%= @food.serving %>人前）</h1>
                 <div class="p-2">
-                  <ul class="list-disc list-inside">
+                  <ul class="list-disc list-inside text-md lg:text-lg">
                     <% @food.ingredients.each do |ingredient| %>
                       <li><span class="font-semibold"><%= ingredient.ingredient_name %></span> : <%= ingredient.decorate.proper_quantity? %></li>
                     <% end %>
@@ -70,14 +72,14 @@
               </div>
               <!-- 調理時間 -->
               <div class="p-3">
-                <h1 class="text-2xl font-bold underline"><%= Food.human_attribute_name(:cooking_time) %></h1>
+                <h1 class="text-xl lg:text-2xl font-bold underline"><%= Food.human_attribute_name(:cooking_time) %></h1>
                 <div class="p-2">
                   <%= @food.cooking_time %><%= @food.cooking_time_unit_i18n %>
                 </div>
               </div>
               <!-- コメント -->
               <div class="p-3">
-                <h1 class="text-2xl font-bold underline"><%= Food.human_attribute_name(:cooking_comment) %></h1>
+                <h1 class="text-xl lg:text-2xl font-bold underline"><%= Food.human_attribute_name(:cooking_comment) %></h1>
                 <div class="p-2">
                   <%= simple_format(@food.decorate.cooking_comment?) %>
                 </div>
@@ -86,7 +88,7 @@
             <div>
               <!-- 作り方 -->
               <div class="p-3">
-                <h1 class="text-2xl font-bold underline"><%= Food.human_attribute_name(:recipe) %></h1>
+                <h1 class="text-xl lg:text-2xl font-bold underline"><%= Food.human_attribute_name(:recipe) %></h1>
                 <div class="p-2">
                   <%= simple_format(@food.recipe) %>
                 </div>
@@ -95,16 +97,35 @@
           </div>
           <!-- タグ -->
           <div class="p-3">
-            <h1 class="text-2xl font-bold underline"><%= Tag.model_name.human %></h1>
+            <h1 class="text-xl lg:text-2xl font-bold underline"><%= Tag.model_name.human %></h1>
             <div class="flex justify-start pt-3">
               <% if @food.tags.present? %>
                 <% @food.tags.each do |tag| %>
-                  <p class="bg-orange-400 rounded-md text-orange-50 text-xl mr-3 px-4 py-1"><%= tag.name %></p>
+                  <p class="bg-orange-400 rounded-md text-orange-50 text-sm lg:text-xl mr-3 px-2 lg:px-4 py-0.5 lg:py-1"><%= tag.name %></p>
                 <% end %>
               <% else %>
                 <p class="pl-2">なし</p>
               <% end %>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="m-3 lg:m-10 pt-7 border-t-2 border-orange-200">
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <div class="lg:mx-5">
+          <%= render 'comments/form', { food: @food, comment: @comment } %>
+        </div>
+        <div class="lg:mx-5">
+          <div class="flex justify-center lg:justify-start mb-4">
+            <h5 class="text-xl font-bold leading-none text-gray-600 dark:text-white lg:ml-5 pt-1 mt-5 lg:mt-0">~みんなのコメント~</h5>
+          </div>
+          <div class="p-4 lg:mx-5 bg-white rounded-lg shadow-md lg:px-8 dark:bg-gray-800">
+            <% if @comments.present? %>
+              <%= render 'comments/comments', comments: @comments %>
+            <% else %>
+              <p><%= t('.no_comment') %></p>
+            <% end %>
           </div>
         </div>
       </div>

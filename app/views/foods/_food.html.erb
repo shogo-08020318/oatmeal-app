@@ -10,16 +10,16 @@
     </div>
   </div>
   <div class="flex justify-between">
-      <p class="text-gray-700 text-base px-5 pb-2 underline">
-        <i class="fas fa-user-alt"></i><%= link_to food.user.name, user_path(food.user.uuid) %>
-      </p>
-      <div>
-        <% if current_user&.mine?(food) %>
-          <%= render 'update_destroy', food: food  %>
-        <% else %>
-          <%= render 'favorites/favorite_button', food: food  %>
-        <% end %>
-      </div>
+    <p class="text-gray-700 text-base px-5 pb-2 underline">
+      <i class="fas fa-user-alt"></i><%= link_to food.user.name, user_path(food.user.uuid) %>
+    </p>
+    <div>
+      <% if current_user&.mine?(food) %>
+        <%= render 'update_destroy', food: food  %>
+      <% else %>
+        <%= render 'favorites/favorite_button', food: food  %>
+      <% end %>
+    </div>
   </div>
   <div class="px-6 pb-2 mt-2">
     <% food.tags.each do |tag| %>

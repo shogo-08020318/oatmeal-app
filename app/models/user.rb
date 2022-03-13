@@ -13,6 +13,9 @@ class User < ApplicationRecord
   # お気に入り登録している
   has_many :favorite_foods, through: :favorites, source: :food
 
+  # ユーザーはコメントを複数作成できる
+  has_many :comments, dependent: :destroy
+
   # パスワードは半角アルファベット（大文字・小文字・数値）
   VALID_PASSWORD_REGEX = /\A[a-zA-Z0-9]+\z/.freeze
 
