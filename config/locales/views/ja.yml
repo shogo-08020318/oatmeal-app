@@ -6,7 +6,10 @@ ja:
     no_acount: アカウントをお持ちでない方はこちら
     already_acount: 既にアカウントお持ちの方はこちら
     require_login: ログインしてください
+    forget_password: パスワードをお忘れの方はこちら
     post: 投稿する
+    submit: 送信する
+    update: 更新する
   users:
     new:
       title: 新規登録
@@ -59,3 +62,12 @@ ja:
       fail: コメントの投稿に失敗しました。
     destroy:
       success: コメントを削除しました。
+  password_resets:
+    new:
+      title: パスワードリセット申請
+    edit:
+      title: パスワードリセット
+    create:
+      success: メールを送信しました
+    update:
+      success: パスワードを変更しました
