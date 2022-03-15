@@ -1,0 +1,25 @@
+<div class="flex items-center min-h-screen">
+  <div class="container mx-auto">
+    <div class="max-w-md mx-auto my-10">
+      <div class="text-center">
+        <h1 class="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200"><%= t('.title') %></h1>
+        <p><%= @user.name %>さん、新しく登録するパスワードを入力してください</p>
+      </div>
+      <div class="m-7">
+        <%= form_with model: @user, url: password_reset_path(@token), method: :put, local: true do |f| %>
+          <div class="mb-6">
+            <%= f.label :password, class: "block mb-2 text-sm text-gray-600 dark:text-gray-400" %>
+            <%= f.password_field :password, placeholder: User.human_attribute_name(:password), class: "w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-orange-100 focus:border-orange-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" %>
+          </div>
+          <div class="mb-6">
+            <%= f.label :password_confirmation, class: "block mb-2 text-sm text-gray-600 dark:text-gray-400" %>
+            <%= f.password_field :password_confirmation, placeholder: User.human_attribute_name(:password_confirmation), class: "w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-orange-100 focus:border-orange-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" %>
+          </div>
+          <div class="mb-6">
+            <%= f.submit t('defaults.update'), class: "w-full p-2 lg:p-2 text-white text-lg lg:text-xl bg-yellow-500 rounded-md focus:bg-yellow-600 focus:outline-none" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
