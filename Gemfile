@@ -98,3 +98,6 @@ gem 'draper'
 
 # AWS S3
 gem 'fog-aws'
+
+# 管理者画面
+gem 'rails_admin', '~> 2.0'
