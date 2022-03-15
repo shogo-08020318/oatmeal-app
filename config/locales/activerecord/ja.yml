@@ -7,6 +7,8 @@ ja:
       ingredient: 材料
       favorite: お気に入り
       comment: コメント
+      nutrition: 栄養
+      food_tag: レシピのタグ
     attributes:
       user:
         name: 名前
@@ -30,6 +32,12 @@ ja:
         proper_quantity: 適量
       comment:
         body: コメント
+      nutrition:
+        calories: カロリー
+        carbo: 炭水化物
+        fiber: 食物繊維
+        protein: タンパク質
+        fat: 脂質
   activemodel:
     attributes:
       food_form:
