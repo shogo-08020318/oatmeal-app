@@ -11,8 +11,10 @@
         </p>
       </div>
       <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-        <%= link_to comment_path(comment), method: :delete, remote: true, data: { confirm: 'このコメントを削除してよろしいですか？' } do %>
-          <i class="fas fa-trash-alt mr-2 text-red-700"></i>
+        <% if current_user.mine?(comment) %>
+          <%= link_to comment_path(comment), method: :delete, remote: true, data: { confirm: 'このコメントを削除してよろしいですか？' } do %>
+            <i class="fas fa-trash-alt mr-2 text-red-700"></i>
+          <% end %>
         <% end %>
       </div>
     </div>
