@@ -101,6 +101,7 @@ gem 'fog-aws'
 
 # 管理者画面
 gem 'rails_admin', '~> 2.0'
+gem 'rails_admin-i18n'
 
 # 認可機能
 gem 'cancancan'
