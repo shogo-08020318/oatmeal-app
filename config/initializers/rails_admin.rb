@@ -1,4 +1,15 @@
 RailsAdmin.config do |config|
+  config.authenticate_with do
+    # Use sorcery's before filter to auth users
+    require_login
+
+    # ユーザーが管理者でなければルートパスにリダイレクトさせる
+    redirect_to main_app.root_path unless current_user.admin?
+  end
+  config.current_user_method(&:current_user)
+
+  # 親のクラスを指定
+  config.parent_controller = 'ApplicationController'
 
   ### Popular gems integration
 
@@ -8,8 +19,8 @@ RailsAdmin.config do |config|
   # end
   # config.current_user_method(&:current_user)
 
-  ## == CancanCan ==
-  # config.authorize_with :cancancan
+  # == CancanCan ==
+  config.authorize_with :cancancan
 
   ## == Pundit ==
   # config.authorize_with :pundit

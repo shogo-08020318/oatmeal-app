@@ -79,6 +79,7 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
+    cancancan (3.3.0)
     capybara (3.36.0)
       addressable
       matrix
@@ -722,6 +723,7 @@ DEPENDENCIES
   binding_of_caller
   bootsnap (>= 1.4.4)
   byebug
+  cancancan
   capybara
   carrierwave (~> 2.0)
   carrierwave-i18n
