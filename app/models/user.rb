@@ -16,6 +16,10 @@ class User < ApplicationRecord
   # ユーザーはコメントを複数作成できる
   has_many :comments, dependent: :destroy
 
+  # twitter認証用
+  has_many :authentications, dependent: :destroy
+  accepts_nested_attributes_for :authentications
+
   # パスワードは半角アルファベット（大文字・小文字・数値）
   VALID_PASSWORD_REGEX = /\A[a-zA-Z0-9]+\z/.freeze
 
