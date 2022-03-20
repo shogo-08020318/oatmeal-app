@@ -20,6 +20,9 @@
         <%= f.password_field :password_confirmation, class: "w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none", placeholder: "password" %>
       </div>
       <%= f.submit class: "w-full mt-6 bg-orange-400 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans" %>
+      <%= link_to auth_at_provider_path(provider: :twitter), class: 'w-full text-white bg-cyan-400 hover:bg-cyan-600 focus:ring-4 focus:ring-cyan-100 font-medium rounded-lg text-md px-5 py-2.5 text-center inline-flex flex justify-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 mt-5 font-semibold font-sans' do %>
+        <p><i class="fab fa-twitter"></i>Twitterでログイン</p>
+      <% end %>
     <% end %>
     <%= link_to t('defaults.already_acount'), login_path, class: "flex justify-center items-center mt-6 mb-3 text-sm lg:text-lg text-orange-700 tracking-wide font-semibold font-sans" %>
   </div>
