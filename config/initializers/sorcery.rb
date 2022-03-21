@@ -121,7 +121,8 @@ Rails.application.config.sorcery.configure do |config|
   config.twitter.user_info_mapping = {
     # Userモデルのemailにscreen_name（@〜〜〜）を入れる
     email: 'screen_name',
-    name: 'name'
+    name: 'name',
+    twitter_id: 'id_str'
   }
   #
   # config.facebook.key = ""
