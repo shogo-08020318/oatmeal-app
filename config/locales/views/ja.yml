@@ -71,3 +71,6 @@ ja:
       success: メールを送信しました
     update:
       success: パスワードを変更しました
+  oauths:
+    callback:
+      success: "%{item}でログインしました。"

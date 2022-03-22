@@ -16,6 +16,10 @@ class User < ApplicationRecord
   # ユーザーはコメントを複数作成できる
   has_many :comments, dependent: :destroy
 
+  # twitter認証用
+  has_many :authentications, dependent: :destroy
+  accepts_nested_attributes_for :authentications
+
   # パスワードは半角アルファベット（大文字・小文字・数値）
   VALID_PASSWORD_REGEX = /\A[a-zA-Z0-9]+\z/.freeze
 
@@ -28,7 +32,10 @@ class User < ApplicationRecord
   # メールアドレスのフォーマットを確認
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   # メールアドレスは必須項目かつ一意、大文字小文字の区別を無効にしフォーマットと一致しているか確認
-  validates :email, { presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false } }
+  # メールアドレス認証、twitter認証共通のバリデーション → emailは必須項目
+  validates :email, presence: true
+  # twitter_idが存在する → emailのフォーマットはチェックしない、twitter_idが存在しない → emailのフォーマットをチェックする
+  validates :email, { format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }, if: :twitter_user_check }
 
   # ユーザー名は必須項目、上限20文字
   validates :name, presence: true, length: { maximum: 20 }
@@ -58,4 +65,12 @@ class User < ApplicationRecord
   def favorite?(food)
     favorite_foods.include?(food)
   end
+end
+
+# emailのフォーマットをチェックするか判断するためのメソッド
+def twitter_user_check
+  # twitter_idが存在するならemailのフォーマットのチェックはしない
+  return false if twitter_id.present?
+
+  true
 end
