@@ -4,7 +4,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 bg-white shadow-xl rounded-2xl">
       <div class="w-full px-4">
         <div class="py-10 mt-10">
-          <%= image_tag @user.avatar.url(:thumb), class: "w-48 h-48 mx-auto shadow-lg rounded-full" %>
+          <%= image_tag @user.avatar.url, class: "w-48 h-48 mx-auto shadow-lg rounded-full" %>
           <h2 class="text-lg lg:text-3xl font-heading font-medium text-center py-7 text-gray-600"><%= @user.name %></h2>
         </div>
       </div>

@@ -31,7 +31,7 @@ class OauthsController < ApplicationController
 
   # twitterのプロフィール画像は個別で保存
   def twitter_profile_image(profile_image)
-    @user.remote_avatar_url = profile_image
+    @user.remote_avatar_url = profile_image.gsub(/_normal/, '')
     @user.save!
   end
 end
