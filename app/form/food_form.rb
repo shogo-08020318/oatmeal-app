@@ -118,9 +118,9 @@ class FoodForm
     end
 
     # 翻訳する処理を実行
-    translated_ingredients = google_translation(translate_array)
+    translated_ingredients = google_translation(translate_array) if translate_array.present?
     # 翻訳したデータを使ってマクロ栄養素を算出
-    nutrition_data = nutrition_calculate(translated_ingredients)
+    nutrition_data = translated_ingredients.present? ? nutrition_calculate(translated_ingredients) : { calories: 0, carbo: 0, fiber: 0, protein: 0, fat: 0 }
     # 投稿されたレシピのマクロ栄養素として保存
     food.create_nutrition!(nutrition_data)
   end
