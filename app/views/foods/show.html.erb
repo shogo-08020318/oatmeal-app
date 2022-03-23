@@ -45,7 +45,7 @@
                         <p class="font-bold text-gray-600 text-lg lg:text-2xl px-4 lg:px-0">このレシピの栄養素のデータはありません</p>
                       </div>
                     <% else %>
-                      <p class="text-center text-lg font-medium pb-5"><%= @food.name %>のマクロ栄養素(g)</p>
+                      <p class="text-center text-lg font-medium pb-5"><%= @food.name %>のマクロ栄養素(g)<br>（１食当たり）</p>
                       <canvas class="" id="chartRadar" style="display: block; height: 900px; width: 1050px;"></canvas>
                     <% end %>
                   </div>
@@ -55,7 +55,7 @@
                         <p class="font-bold text-gray-600 text-lg lg:text-2xl px-4 lg:px-0">このレシピの栄養素のデータはありません</p>
                       </div>
                     <% else %>
-                      <p class="text-center text-lg font-medium"><%= @food.name %>のカロリー(kcal)</p>
+                      <p class="text-center text-lg font-medium"><%= @food.name %>のカロリー(kcal)<br>（１食当たり）</p>
                       <canvas class="p-10" id="chartDoughnut" style="display: block; height: 900px; width: 1050px;"></canvas>
                     <% end %>
                   </div>
