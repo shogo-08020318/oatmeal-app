@@ -118,9 +118,9 @@ class FoodForm
     end
 
     # 翻訳する処理を実行
-    translated_ingredients = google_translation(translate_array)
+    translated_ingredients = google_translation(translate_array) if translate_array.present?
     # 翻訳したデータを使ってマクロ栄養素を算出
-    nutrition_data = nutrition_calculate(translated_ingredients)
+    nutrition_data = translated_ingredients.present? ? nutrition_calculate(translated_ingredients) : { calories: 0, carbo: 0, fiber: 0, protein: 0, fat: 0 }
     # 投稿されたレシピのマクロ栄養素として保存
     food.create_nutrition!(nutrition_data)
   end
@@ -149,12 +149,16 @@ class FoodForm
     url = URI.parse("https://api.edamam.com/api/nutrition-data?app_id=#{app_id}&app_key=#{app_key}&ingr=#{ingr}")
     response = Net::HTTP.get_response(url)
     response_body = JSON.parse(response.body)
-    {
-      calories: response_body['totalNutrients']['ENERC_KCAL']['quantity'],
-      carbo: response_body['totalNutrients']['CHOCDF']['quantity'],
-      fiber: response_body['totalNutrients']['FIBTG']['quantity'],
-      protein: response_body['totalNutrients']['PROCNT']['quantity'],
-      fat: response_body['totalNutrients']['FAT']['quantity']
-    }
+    if response_body['totalNutrients'].present?
+      {
+        calories: response_body['totalNutrients']['ENERC_KCAL']['quantity'],
+        carbo: response_body['totalNutrients']['CHOCDF']['quantity'],
+        fiber: response_body['totalNutrients']['FIBTG']['quantity'],
+        protein: response_body['totalNutrients']['PROCNT']['quantity'],
+        fat: response_body['totalNutrients']['FAT']['quantity']
+      }
+    else
+      { calories: 0, carbo: 0, fiber: 0, protein: 0, fat: 0 }
+    end
   end
 end
