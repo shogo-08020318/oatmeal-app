@@ -149,12 +149,16 @@ class FoodForm
     url = URI.parse("https://api.edamam.com/api/nutrition-data?app_id=#{app_id}&app_key=#{app_key}&ingr=#{ingr}")
     response = Net::HTTP.get_response(url)
     response_body = JSON.parse(response.body)
-    {
-      calories: response_body['totalNutrients']['ENERC_KCAL']['quantity'],
-      carbo: response_body['totalNutrients']['CHOCDF']['quantity'],
-      fiber: response_body['totalNutrients']['FIBTG']['quantity'],
-      protein: response_body['totalNutrients']['PROCNT']['quantity'],
-      fat: response_body['totalNutrients']['FAT']['quantity']
-    }
+    if response_body['totalNutrients'].present?
+      {
+        calories: response_body['totalNutrients']['ENERC_KCAL']['quantity'],
+        carbo: response_body['totalNutrients']['CHOCDF']['quantity'],
+        fiber: response_body['totalNutrients']['FIBTG']['quantity'],
+        protein: response_body['totalNutrients']['PROCNT']['quantity'],
+        fat: response_body['totalNutrients']['FAT']['quantity']
+      }
+    else
+      { calories: 0, carbo: 0, fiber: 0, protein: 0, fat: 0 }
+    end
   end
 end
