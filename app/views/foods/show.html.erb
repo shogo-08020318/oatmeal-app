@@ -147,6 +147,14 @@
 
 <!-- Chart radar -->
 <script>
+  if (window.matchMedia( "(min-width: 1024px)" ).matches) {
+    var fontSize = 20;
+  } else if (window.matchMedia( "(min-width: 768px)" ).matches) {
+    var fontSize = 15;
+  } else {
+    var fontSize = 10;
+  }
+
   const dataRadar = {
     labels: [
       "炭水化物",
@@ -179,11 +187,11 @@
         ticks: {
           suggestedMin: 0,
           stepSize: 5,
-          fontSize: 20,
+          fontSize: fontSize,
           fontColor: '#000'
         },
         pointLabels: {
-          fontSize: 20,
+          fontSize: fontSize,
           fontColor: '#000'
         }
       },
@@ -201,6 +209,16 @@
 
 <!-- Chart doughnut -->
 <script>
+if (window.matchMedia( "(min-width: 768px)" ).matches) {
+    var macrolabel = 25;
+    var totallabel = 60;
+    var calorielabel = 45;
+  } else {
+    var macrolabel = 15;
+    var totallabel = 40;
+    var calorielabel = 35;
+  }
+
   const dataDoughnut = {
     labels: [
       "炭水化物",
@@ -239,7 +257,7 @@
             render: function (args) {
               return args.label + '\n' + args.value + '%';
             },
-            fontSize: 25,
+            fontSize: macrolabel,
             fontColor: '#fff',
           }
         ],
@@ -248,7 +266,7 @@
             {
               text: '合計',
               font: {
-                size: '60',
+                size: totallabel,
                 tyle: 'italic',
                 wieght: 'bold'
               }
@@ -256,7 +274,7 @@
             {
               text: gon.nutrition_calories[3] + 'kcal',
               font: {
-                size: '45'
+                size: calorielabel
               },
             color: 'red'
             }
