@@ -43,19 +43,19 @@ class Food < ApplicationRecord
   # 特定の材料を含まない
   scope :not_ingredients, ->(not_ingredient_name) { where.not(id: Ingredient.distinct.where('ingredient_name like ?', "%#{not_ingredient_name}%").pluck(:food_id)) }
   # カロリーで検索（以上）
-  scope :over_calories, ->(over_calories) { where('nutritions.calories >= ?', over_calories) }
+  scope :over_calories, ->(over_calories) { where('nutritions.calories / serving >= ?', over_calories) }
   # カロリーで検索（以下）
-  scope :under_calories, ->(under_calories) { where('nutritions.calories <= ?', under_calories) }
+  scope :under_calories, ->(under_calories) { where('nutritions.calories / serving <= ?', under_calories) }
   # 炭水化物で検索（以上）
-  scope :over_carbo, ->(over_carbo) { where('nutritions.carbo >= ?', over_carbo) }
+  scope :over_carbo, ->(over_carbo) { where('nutritions.carbo / serving >= ?', over_carbo) }
   # 炭水化物で検索（以下）
-  scope :under_carbo, ->(under_carbo) { where('nutritions.carbo <= ?', under_carbo) }
+  scope :under_carbo, ->(under_carbo) { where('nutritions.carbo / serving <= ?', under_carbo) }
   # たんぱく質で検索（以上）
-  scope :over_protein, ->(over_protein) { where('nutritions.protein >= ?', over_protein) }
+  scope :over_protein, ->(over_protein) { where('nutritions.protein / serving >= ?', over_protein) }
   # たんぱく質で検索（以下）
-  scope :under_protein, ->(under_protein) { where('nutritions.protein <= ?', under_protein) }
+  scope :under_protein, ->(under_protein) { where('nutritions.protein / serving <= ?', under_protein) }
   # 脂質で検索（以上）
-  scope :over_fat, ->(over_fat) { where('nutritions.fat >= ?', over_fat) }
+  scope :over_fat, ->(over_fat) { where('nutritions.fat / serving >= ?', over_fat) }
   # 脂質で検索（以下）
-  scope :under_fat, ->(under_fat) { where('nutritions.fat <= ?', under_fat) }
+  scope :under_fat, ->(under_fat) { where('nutritions.fat / serving <= ?', under_fat) }
 end
