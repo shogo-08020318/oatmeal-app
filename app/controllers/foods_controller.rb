@@ -1,10 +1,11 @@
 class FoodsController < ApplicationController
+  include Pagy::Backend
   before_action :get_food, only: %i[edit update destroy]
   skip_before_action :require_login, only: %i[index show]
 
   def index
     @food_search_form = FoodSearchForm.new(search_params)
-    @foods = @food_search_form.search.includes(:user, :tags).order(created_at: :desc)
+    @pagy, @foods = pagy(@food_search_form.search.includes(:user, :tags).order(created_at: :desc))
   end
 
   def show

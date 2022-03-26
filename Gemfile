@@ -105,3 +105,6 @@ gem 'rails_admin-i18n'
 
 # 認可機能
 gem 'cancancan'
+
+# ページネーション
+gem 'pagy', '~> 5.10'
