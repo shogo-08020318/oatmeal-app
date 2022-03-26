@@ -1,3 +1,5 @@
+<% content_for(:title, t('.title')) %>
+
 <div class="flex justify-center items-center py-16">
   <div class="lg:w-2/5 md:w-1/2 w-11/12">
     <%= form_with model: @user, local: true, class: "bg-white p-5 lg:p-10 rounded-lg shadow-lg min-w-full" do |f| %>

@@ -35,7 +35,7 @@ ja:
     show:
       no_comment: コメントはありません。
     new:
-      title: レシピ作成
+      title: レシピ投稿
     create:
       success: レシピを投稿しました。
       fail: レシピの投稿に失敗しました。
