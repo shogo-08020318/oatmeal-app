@@ -1,0 +1,63 @@
+.pagy-nav {
+  @apply flex space-x-2;
+}
+
+.pagy-nav .page a,
+.pagy-nav .page.active,
+.pagy-nav .page.prev.disabled,
+.pagy-nav .page.next.disabled,
+.page a,
+.page.active,
+.page.prev.disabled,
+.page.next.disabled {
+  @apply block rounded-lg px-3 py-1 text-lg text-orange-500 font-semibold bg-orange-200 shadow-md;
+  &:hover{
+    @apply bg-orange-300;
+  }
+  &:active{
+    @apply bg-orange-400 text-white;
+  }
+}
+
+.pagy-nav .page.prev.disabled,
+.pagy-nav .page.next.disabled,
+ .page.prev.disabled,
+ .page.next.disabled {
+  @apply text-orange-400 cursor-default;
+  &:hover {
+    @apply text-orange-400 bg-orange-200;
+  }
+  &:active {
+    @apply text-orange-400 bg-orange-200;
+  }
+}
+
+.pagy-nav .page.active,
+.page.active {
+  @apply text-white cursor-default bg-orange-400;
+  &:hover {
+    @apply text-white bg-orange-400;
+  }
+  &:active {
+    @apply bg-orange-400 text-white;
+  }
+}
+
+.pagy-combo-input {
+  @apply bg-white px-2 rounded-sm
+}
+
+.page.prev,
+.page.next {
+  &:hover {
+    @apply text-orange-800;
+  }
+  &:active {
+    @apply text-orange-800;
+  }
+}
+
+.page.prev.disabled,
+.page.next.disabled {
+  @apply text-orange-400 cursor-default;
+}
