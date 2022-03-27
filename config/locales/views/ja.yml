@@ -10,9 +10,11 @@ ja:
     post: 投稿する
     submit: 送信する
     update: 更新する
+    required: ※必須
   users:
     new:
       title: 新規登録
+      twitter_register: Twitterで登録
     create:
       success: ユーザー登録が完了しました。
       fail: ユーザーの登録に失敗しました。
@@ -23,6 +25,7 @@ ja:
   user_sessions:
     new:
       title: ログイン
+      twitter_login: Twitterでログイン
     create:
       success: ログインしました。
       fail: ログインに失敗しました。
@@ -32,10 +35,22 @@ ja:
     index:
       title: レシピ一覧
       no_foods: 該当するレシピはありません。
+      detailed_search: 詳細検索
+      search: 検索
+      free_word: フリーワード
+      key_word: キーワード
+      calorie_macro: カロリー・マクロ栄養素
+      close: ×閉じる
     show:
+      contributor: 投稿者
       no_comment: コメントはありません。
+      macro: マクロ栄養素
+      no_nutrition_data: このレシピの栄養素のデータはありません。
+      no_tag: なし
+      comments: ~みんなのコメント~
     new:
       title: レシピ投稿
+      add_ingredient: 材料追加
     create:
       success: レシピを投稿しました。
       fail: レシピの投稿に失敗しました。
@@ -46,6 +61,7 @@ ja:
       fail: レシピの更新に失敗しました。
     destroy:
       success: レシピを削除しました。
+      confirm: このレシピを削除してよろしいですか？
   profiles:
     show:
       title: マイページ
@@ -62,6 +78,7 @@ ja:
       fail: コメントの投稿に失敗しました。
     destroy:
       success: コメントを削除しました。
+      confirm: このコメントを削除してよろしいですか？
   password_resets:
     new:
       title: パスワードリセット申請
