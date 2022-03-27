@@ -1,3 +1,5 @@
+<% content_for(:title, @food.name) %>
+
 <div class="flex justify-center">
   <div class="py-6 w-full px-2 lg:px-5">
     <!-- Image gallery -->
@@ -10,7 +12,7 @@
           </div>
           <div class="flex justify-between">
             <div class="p-5">
-              <p class="text-md lg:text-xl"><i class="fas fa-user-edit"></i>投稿者</p>
+              <p class="text-md lg:text-xl"><i class="fas fa-user-edit"></i><%= t('.contributor') %></p>
               <%= link_to @food.user.name, user_path(@food.user.uuid), class: "text-xl lg:text-3xl text-gray-900 hover:text-orange-400" %>
             </div>
             <div class="pl-5 text-lg lg:text-4xl pt-10">
@@ -27,12 +29,12 @@
             <ul class="flex mb-0 list-none flex-wrap flex-row">
               <li class="-mb-px last:mr-0 flex-auto text-center">
                 <a class="text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-white bg-orange-400" onclick="changeAtiveTab(event,'tab-profile')">
-                  マクロ栄養素
+                  <%= t('.macro') %>
                 </a>
               </li>
               <li class="-mb-px last:mr-0 flex-auto text-center">
                 <a class="text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-orange-400 bg-white" onclick="changeAtiveTab(event,'tab-settings')">
-                  カロリー
+                  <%= Nutrition.human_attribute_name(:calories) %>
                 </a>
               </li>
             </ul>
@@ -42,7 +44,7 @@
                   <div class="block" id="tab-profile">
                     <% if @food.nutrition.decorate.nutrition_check %>
                       <div class="text-center my-20 lg:my-24 2xl:my-40 py-12 lg:py-24 2xl:py-24">
-                        <p class="font-bold text-gray-600 text-lg lg:text-2xl px-4 lg:px-0">このレシピの栄養素のデータはありません</p>
+                        <p class="font-bold text-gray-600 text-lg lg:text-2xl px-4 lg:px-0"><%= t('.no_nutrition_data') %></p>
                       </div>
                     <% else %>
                       <p class="text-center text-lg font-medium pb-5"><%= @food.name %>のマクロ栄養素(g)<br>（１食当たり）</p>
@@ -52,7 +54,7 @@
                   <div class="hidden" id="tab-settings">
                     <% if @food.nutrition.decorate.nutrition_check %>
                       <div class="text-center my-20 lg:my-40 py-12 lg:py-24">
-                        <p class="font-bold text-gray-600 text-lg lg:text-2xl px-4 lg:px-0">このレシピの栄養素のデータはありません</p>
+                        <p class="font-bold text-gray-600 text-lg lg:text-2xl px-4 lg:px-0"><%= t('.no_nutrition_data') %></p>
                       </div>
                     <% else %>
                       <p class="text-center text-lg font-medium"><%= @food.name %>のカロリー(kcal)<br>（１食当たり）</p>
@@ -116,7 +118,7 @@
                   <p class="bg-orange-400 rounded-md text-orange-50 text-sm lg:text-xl mr-3 px-2 lg:px-4 py-0.5 lg:py-1"><%= tag.name %></p>
                 <% end %>
               <% else %>
-                <p class="pl-2">なし</p>
+                <p class="pl-2"><%= t('.no_tag') %></p>
               <% end %>
             </div>
           </div>
@@ -130,7 +132,7 @@
         </div>
         <div class="lg:mx-5">
           <div class="flex justify-center lg:justify-start mb-4">
-            <h5 class="text-xl font-bold leading-none text-gray-600 dark:text-white lg:ml-5 pt-1 mt-5 lg:mt-0">~みんなのコメント~</h5>
+            <h5 class="text-xl font-bold leading-none text-gray-600 dark:text-white lg:ml-5 pt-1 mt-5 lg:mt-0"><%= t('.comments') %></h5>
           </div>
           <div class="p-4 lg:mx-5 bg-white rounded-lg shadow-md lg:px-8 dark:bg-gray-800">
             <% if @comments.present? %>

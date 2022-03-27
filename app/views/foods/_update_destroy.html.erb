@@ -1,6 +1,6 @@
 <%= link_to edit_food_path(food.uuid) do %>
   <i class="fas fa-pencil-alt mr-2 text-green-700"></i>
 <% end %>
-<%= link_to food_path(food.uuid), method: :delete, data: { confirm: 'このレシピを削除してよろしいですか？' } do %>
+<%= link_to food_path(food.uuid), method: :delete, data: { confirm: t('foods.destroy.confirm') } do %>
   <i class="fas fa-trash-alt mr-2 text-red-700"></i>
 <% end %>

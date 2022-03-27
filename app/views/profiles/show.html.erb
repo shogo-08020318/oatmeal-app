@@ -1,7 +1,9 @@
+<% content_for(:title, t('.title')) %>
+
 <div class="flex justify-center items-center py-16">
   <div class="lg:w-3/5 md:w-1/2 w-11/12">
     <div class="px-4 pt-3 pb-5 sm:px-6">
-      <div class="text-xl lg:text-3xl lg:text-2xl text-center leading-6 font-medium text-gray-600 font-bold">プロフィール</div>
+      <div class="text-xl lg:text-3xl lg:text-2xl text-center leading-6 font-medium text-gray-600 font-bold"><%= t('.title') %></div>
     </div>
     <div class= "bg-white p-4 lg:p-10 rounded-lg shadow-lg min-w-full">
       <%= image_tag current_user.avatar.url, class: "w-32 h-32 mx-auto shadow-lg rounded-full mb-5" %>
