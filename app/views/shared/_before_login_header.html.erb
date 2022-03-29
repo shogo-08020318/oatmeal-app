@@ -1,25 +1,53 @@
-<header class="sticky top-0 z-50">
+<header class="sticky top-0 z-50 border-b-2 border-orange-300 shadow-md">
   <div class="header">
 
-    <nav class="bg-orange-400 py-2 md:py-4">
-      <div class="container px-4 mx-auto md:flex md:items-center">
+    <nav class="bg-white py-2 md:py-4">
+      <div class="container px-4 mx-auto lg:flex lg:items-center">
 
         <div class="flex justify-between items-center">
-          <%= link_to "OATMEAL-APP", root_path, class: "font-bold text-xl text-orange-100" %>
-          <button class="border border-solid border-gray-100 px-3 py-1 rounded text-gray-100 opacity-50 hover:opacity-75 md:hidden" id="navbar-toggle">
+          <%= link_to "OATMEAL-APP", root_path, class: "font-bold text-xl text-orange-400" %>
+          <button class="border border-solid border-orange-400 px-3 py-1 rounded text-orange-400 lg::hidden" id="navbar-toggle">
             <i class="fas fa-bars"></i>
           </button>
         </div>
 
-        <div class="hidden md:flex flex-col md:flex-row md:ml-auto mt-3 md:mt-0" id="navbar-collapse">
-          <%= link_to t('foods.index.title'), foods_path, class: "p-2 lg:px-4 md:mx-2 text-orange-100 text-center border border-transparent rounded hover:bg-orange-100 hover:text-orange-700 transition-colors duration-300" %>
-          <%= link_to t('defaults.login'), login_path, class: "p-2 lg:px-4 md:mx-2 text-orange-100 text-center border border-transparent rounded hover:bg-orange-100 hover:text-orange-700 transition-colors duration-300" %>
-          <%= link_to t('users.new.title'), new_user_path, class: "p-2 lg:px-4 md:mx-2 text-orange-100 text-center border border-solid border-orange-100 bg-orange-400 rounded hover:bg-white hover:text-orange-700 transition-colors duration-300 mt-1 md:mt-0 md:ml-1" %>
+        <div class="hidden lg:flex flex-col lg:flex-row lg:ml-auto mt-3 lg:mt-0 text-sm md:text-lg lg:text-xl"" id="navbar-collapse">
+          <%= link_to foods_path, class: "p-2 lg:px-4 md:mx-2 text-orange-400 text-center border border-transparent rounded hover:bg-orange-50 hover:text-orange-500 transition-colors duration-300", onmouseenter: "openPopover(event,'foods-id')", onmouseleave: "openPopover(event,'foods-id')"  do %>
+            <i class="fas fa-images"></i><span class="lg:hidden"><%= t('foods.index.title') %></span>
+          <% end %>
+          <%= link_to login_path, class: "p-2 lg:px-4 md:mx-2 text-orange-400 text-center border border-transparent rounded hover:bg-orange-50 hover:text-orange-500 transition-colors duration-300", onmouseenter: "openPopover(event,'login-id')", onmouseleave: "openPopover(event,'login-id')" do %>
+           <i class="fas fa-sign-in-alt"></i><span class="lg:hidden"><%= t('defaults.login') %></span>
+          <% end %>
+          <%= link_to new_user_path, class: "p-2 lg:px-4 md:mx-2 text-orange-400 text-center border border-transparent rounded hover:bg-orange-50 hover:text-orange-500 transition-colors duration-300", onmouseenter: "openPopover(event,'new-user-id')", onmouseleave: "openPopover(event,'new-user-id')"  do %>
+            <i class="fas fa-user-plus"></i><span class="lg:hidden"><%= t('users.new.title') %></span>
+          <% end %>
         </div>
       </div>
     </nav>
   </div>
 </header>
+
+<div class="hidden bg-white border-0 mb-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg" id="foods-id">
+  <div>
+    <div class="bg-orange-500 text-white font-semibold p-2 mb-0 border-b border-solid border-blueGray-100 uppercase rounded-lg">
+      <%= t('foods.index.title') %>
+    </div>
+  </div>
+</div>
+<div class="hidden bg-white border-0 mb-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg" id="login-id">
+  <div>
+    <div class="bg-orange-500 text-white font-semibold p-2 mb-0 border-b border-solid border-blueGray-100 uppercase rounded-lg">
+      <%= t('defaults.login') %>
+    </div>
+  </div>
+</div>
+<div class="hidden bg-white border-0 mb-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg" id="new-user-id">
+  <div>
+    <div class="bg-orange-500 text-white font-semibold p-2 mb-0 border-b border-solid border-blueGray-100 uppercase rounded-lg">
+      <%= t('users.new.title') %>
+    </div>
+  </div>
+</div>
 
 <script>
   let toggleBtn = document.querySelector("#navbar-toggle");
@@ -29,4 +57,21 @@
     collapse.classList.toggle("hidden");
     collapse.classList.toggle("flex");
   };
+</script>
+
+<script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script>
+
+<script>
+  if (window.matchMedia( "(min-width: 1024px)" ).matches) {
+    function openPopover(event,popoverID){
+      let element = event.target;
+      while(element.nodeName !== "A"){
+        element = element.parentNode;
+      }
+      var popper = Popper.createPopper(element, document.getElementById(popoverID), {
+        placement: 'bottom'
+      });
+      document.getElementById(popoverID).classList.toggle("hidden");
+    }
+  }
 </script>
