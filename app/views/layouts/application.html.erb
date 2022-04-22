@@ -21,14 +21,14 @@
     </script>
   </head>
 
-  <body>
+  <body class="bg-white">
     <% if logged_in? %>
       <%= render 'shared/header' %>
     <% else %>
       <%= render 'shared/before_login_header' %>
     <% end %>
     <%= render 'shared/flash' %>
-    <div class="min-h-screen bg-orange-50">
+    <div class="min-h-screen">
       <%= yield %>
     </div>
     <%= render 'shared/footer' %>
