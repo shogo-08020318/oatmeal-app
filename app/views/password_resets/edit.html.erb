@@ -1,27 +1,23 @@
 <% content_for(:title, t('.title')) %>
 
-<div class="flex items-center min-h-screen">
-  <div class="container mx-auto">
-    <div class="max-w-md mx-auto my-10">
-      <div class="text-center">
-        <h1 class="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200"><%= t('.title') %></h1>
+<div class="flex justify-center items-center py-10 mt-20">
+  <div class="lg:w-2/5 md:w-2/3 w-11/12">
+    <%= form_with model: @user, url: password_reset_path(@token), method: :put, local: true, class: "bg-gray-50 p-5 lg:p-10 rounded-lg shadow-lg min-w-full" do |f| %>
+      <div class="text-center font-semibold text-gray-500 dark:text-gray-200">
+        <h1 class="text-3xl pb-2"><%= t('.title') %></h1>
         <p><%= @user.name %>さん、新しく登録するパスワードを入力してください</p>
       </div>
-      <div class="m-7">
-        <%= form_with model: @user, url: password_reset_path(@token), method: :put, local: true do |f| %>
-          <div class="mb-6">
-            <%= f.label :password, class: "block mb-2 text-sm text-gray-600 dark:text-gray-400" %>
-            <%= f.password_field :password, placeholder: User.human_attribute_name(:password), class: "w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-orange-100 focus:border-orange-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" %>
-          </div>
-          <div class="mb-6">
-            <%= f.label :password_confirmation, class: "block mb-2 text-sm text-gray-600 dark:text-gray-400" %>
-            <%= f.password_field :password_confirmation, placeholder: User.human_attribute_name(:password_confirmation), class: "w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-orange-100 focus:border-orange-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" %>
-          </div>
-          <div class="mb-6">
-            <%= f.submit t('defaults.update'), class: "w-full p-2 lg:p-2 text-white text-lg lg:text-xl bg-yellow-500 rounded-md focus:bg-yellow-600 focus:outline-none" %>
-          </div>
-        <% end %>
+      <div class="mb-6">
+        <%= f.label :password, class: "block mb-2 text-sm text-gray-600 dark:text-gray-400" %>
+        <%= f.password_field :password, placeholder: User.human_attribute_name(:password), class: "w-full bg-white shadow-md px-4 py-1.5 rounded-lg focus:outline-none rounded-md focus:outline-none focus:ring focus:ring-orange-400 focus:ring-opacity-80" %>
       </div>
-    </div>
+      <div class="mb-6">
+        <%= f.label :password_confirmation, class: "block mb-2 text-sm text-gray-600 dark:text-gray-400" %>
+        <%= f.password_field :password_confirmation, placeholder: User.human_attribute_name(:password_confirmation), class: "w-full bg-white shadow-md px-4 py-1.5 rounded-lg focus:outline-none rounded-md focus:outline-none focus:ring focus:ring-orange-400 focus:ring-opacity-80" %>
+      </div>
+      <div class="mb-6 text-center">
+        <%= f.submit t('defaults.update'), class: "cursor-pointer w-1/2 mb-2 lg:mb-0 bg-orange-400 hover:bg-orange-600 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans" %>
+      </div>
+    <% end %>
   </div>
 </div>
