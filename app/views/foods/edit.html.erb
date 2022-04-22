@@ -18,7 +18,7 @@
             <%= f.label :image, class: "text-gray-600 font-semibold block my-3 text-md" %>
             <%= f.file_field :image, onchange: 'previewImage()', class: "w-full bg-white shadow-md px-4 py-0.5 mt-2 h-9 rounded-lg focus:outline-none rounded-md focus:outline-none focus:ring focus:ring-orange-400 focus:ring-opacity-80" %>
             <div class="flex justify-center">
-              <%= image_tag @form.food.image_url, class: 'p-1 mt-3 border-4 border-orange-400 rounded-lg', id: 'preview', size: '510x680' %>
+              <%= image_tag @form.food.image_url, class: 'p-1 mt-3 border-4 border-orange-300 rounded-lg', id: 'preview', size: '510x680' %>
             </div>
           </div>
         </div>
@@ -42,7 +42,7 @@
               <%= f.collection_check_boxes :food_tags, Tag.all, :id, :name, { checked: @food.tag_ids.map(&:to_param) }, class: "bg-white px-4 py-2 rounded-lg focus:outline-none hidden" do |b| %>
                 <%= b.label do %>
                   <%= b.check_box(class: "hidden") %>
-                    <span class="w-2/5 lg:w-1/3 bg-yellow-100 border-2 rounded-md border-orange-400 text-orange-500 px-1 mb-4 text-center"><%= b.text %></span>
+                    <span class="w-2/5 lg:w-1/3 bg-yellow-100 rounded-md text-orange-500 px-1 mb-4 text-center"><%= b.text %></span>
                 <% end %>
               <% end %>
             </div>
@@ -62,7 +62,7 @@
         <div class='my-2 pt-2'>
           <span class='cursor-pointer text-white bg-gradient-to-r from-yellow-400 hover:from-yellow-500 via-orange-400 hover:via-orange-500 to-orange-600 hover:to-orange-700 hover:bg-gradient-to-br focus:ring-4 focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2' onclick='addMediumForm(event)'><%= t('foods.new.add_ingredient') %></span>
         </div>
-        <div class="text-xs md:text-lg text-gray-600 pt-2">
+        <div class="text-xs md:text-md text-gray-600 pt-2">
           <p>※材料の量が大体でもわかる場合は、数字と単位を入力してください。</p>
           <p>※材料の量がわからない、少量、お好み、適量の場合は適量にチェックしてください。</p>
         </div>
