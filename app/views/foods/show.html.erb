@@ -1,21 +1,25 @@
 <% content_for(:title, @food.name) %>
 
 <div class="flex justify-center">
-  <div class="py-6 w-full px-2 lg:px-5">
+  <div class="py-6 pb-16 lg:pb-5 w-full px-2 lg:px-5">
     <!-- Image gallery -->
-    <div class="bg-white pt-6 pb-3 lg:m-7 rounded-2xl shadow-lg">
-      <h1 class="text-3xl lg:text-5xl text-gray-600 text-center py-3 font-bold"><%= @food.name %></h1>
+    <div class="bg-white pt-6 pb-3 lg:m-7">
+      <h1 class="text-2xl lg:text-4xl text-gray-600 text-center py-3 font-bold"><%= @food.name %></h1>
       <div class="p-2 lg:pl-10 lg:pr-3 mt-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-x-8">
         <div>
           <div>
-            <%= image_tag @food.image_url(:show), class: "w-full shadow-lg rounded-xl relative z-1 bg-orange-50 p-3" %>
+            <%= image_tag @food.image_url(:show), class: "w-full shadow-lg rounded-xl relative z-1" %>
           </div>
           <div class="flex justify-between">
-            <div class="p-5">
-              <p class="text-md lg:text-xl"><i class="fas fa-user-edit"></i><%= t('.contributor') %></p>
-              <%= link_to @food.user.name, user_path(@food.user.uuid), class: "text-xl lg:text-3xl text-gray-900 hover:text-orange-400" %>
+            <div class="p-7">
+              <div class="grid grid-cols-3">
+                <%= image_tag @food.user.avatar.url(:thumb), class: "w-12 h-12 mx-auto shadow-md rounded-full" %>
+                <div class="col-span-2 pt-3">
+                  <%= link_to @food.user.name, user_path(@food.user.uuid), class: "text-xl lg:text-2xl text-gray-500 hover:text-orange-400 font-semibold" %>
+                </div>
+              </div>
             </div>
-            <div class="pl-5 text-lg lg:text-4xl pt-10">
+            <div class="pl-5 text-lg lg:text-2xl pt-10">
               <% if current_user&.mine?(@food) %>
                 <%= render 'update_destroy', food: @food  %>
               <% else %>
@@ -69,8 +73,8 @@
       </div>
 
       <!-- Product info -->
-      <div class="m-5 pt-4 border-t-2 border-gray-200 shadow-lg text-gray-600">
-        <div class="bg-yellow-50">
+      <div class="mt-5 mx-5 pt-4 border-t-2 border-orange-200 text-gray-600">
+        <div>
           <div class="grid grid-cols-1 lg:grid-cols-2">
             <div>
               <!--材料 -->
@@ -115,7 +119,7 @@
             <div class="flex justify-start pt-3">
               <% if @food.tags.present? %>
                 <% @food.tags.each do |tag| %>
-                  <p class="bg-orange-400 rounded-md text-orange-50 text-sm lg:text-xl mr-3 px-2 lg:px-4 py-0.5 lg:py-1"><%= tag.name %></p>
+                  <%= link_to tag.name, foods_path(q: { food_tags: [tag.id] }), class: "inline-block bg-yellow-100 hover:bg-orange-400 rounded-full px-3 py-1 text-sm font-semibold text-orange-400 hover:text-yellow-100 mr-2 mb-2" %>
                 <% end %>
               <% else %>
                 <p class="pl-2"><%= t('.no_tag') %></p>
@@ -134,11 +138,11 @@
           <div class="flex justify-center lg:justify-start mb-4">
             <h5 class="text-xl font-bold leading-none text-gray-600 dark:text-white lg:ml-5 pt-1 mt-5 lg:mt-0"><%= t('.comments') %></h5>
           </div>
-          <div class="p-4 lg:mx-5 bg-white rounded-lg shadow-md lg:px-8 dark:bg-gray-800">
+          <div class="p-4 lg:mx-5 bg-white rounded-lg shadow-md lg:px-8 dark:bg-gray-800 min-h-full">
             <% if @comments.present? %>
               <%= render 'comments/comments', comments: @comments %>
             <% else %>
-              <p><%= t('.no_comment') %></p>
+              <p class="text-gray-500"><%= t('.no_comment') %></p>
             <% end %>
           </div>
         </div>
@@ -211,15 +215,15 @@
 
 <!-- Chart doughnut -->
 <script>
-if (window.matchMedia( "(min-width: 768px)" ).matches) {
-    var macrolabel = 25;
-    var totallabel = 60;
-    var calorielabel = 45;
-  } else {
-    var macrolabel = 15;
-    var totallabel = 40;
-    var calorielabel = 35;
-  }
+  if (window.matchMedia( "(min-width: 768px)" ).matches) {
+      var macrolabel = 25;
+      var totallabel = 60;
+      var calorielabel = 45;
+    } else {
+      var macrolabel = 15;
+      var totallabel = 40;
+      var calorielabel = 35;
+    }
 
   const dataDoughnut = {
     labels: [
