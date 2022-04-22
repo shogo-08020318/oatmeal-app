@@ -1,13 +1,18 @@
 <% content_for(:title, @user.name) %>
 
 <section class="pt-12 pb-24 bg-blueGray-100 overflow-hidden">
-  <h1 class="text-3xl lg:ext-5xl font-semibold text-center pb-10 text-gray-600"><%= @user.name %></h1>
+  <h1 class="text-3xl lg:text-5xl font-semibold text-center pb-5 text-gray-600"><%= @user.name %></h1>
   <div class="container mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-3 bg-white shadow-xl rounded-2xl">
+    <div class="grid grid-cols-1 lg:grid-cols-3 bg-white rounded-2xl">
       <div class="w-full px-4">
-        <div class="py-10 mt-10">
+        <div class="py-10 mt-10 text-center">
           <%= image_tag @user.avatar.url, class: "w-48 h-48 mx-auto shadow-lg rounded-full" %>
-          <h2 class="text-lg lg:text-3xl font-heading font-medium text-center py-7 text-gray-600"><%= @user.name %></h2>
+          <h2 class="text-lg lg:text-3xl font-heading font-medium pt-7 pb-4 text-gray-600"><%= @user.name %></h2>
+          <% if @user.twitter_id? %>
+            <%= link_to "https://twitter.com/#{@user.email}", class: "text-cyan-400 hover:text-cyan-600 text-lg lg:text-3xl" do %>
+              <i class="fab fa-twitter"></i>
+            <% end %>
+          <% end %>
         </div>
       </div>
       <div class="col-span-2 w-full px-4 mb-14 lg:border-l-2 border-orange-400 border-opacity-30 mt-10">
@@ -16,12 +21,12 @@
             <div class="w-full">
               <ul class="flex mb-0 list-none flex-wrap flex-row">
                 <li class="-mb-px last:mr-0 flex-auto text-center">
-                  <a class="text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-white bg-orange-400" onclick="changeAtiveTab(event,'tab-profile')">
+                  <a class="text-md md:text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-white bg-orange-400" onclick="changeAtiveTab(event,'tab-profile')">
                     <%= t('.user_recipes') %>
                   </a>
                 </li>
                 <li class="-mb-px last:mr-0 flex-auto text-center">
-                  <a class="text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-orange-400 bg-white" onclick="changeAtiveTab(event,'tab-settings')">
+                  <a class="text-md md:text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-orange-400 bg-white" onclick="changeAtiveTab(event,'tab-settings')">
                     <%= Favorite.model_name.human %>
                   </a>
                 </li>
