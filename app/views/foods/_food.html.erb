@@ -1,29 +1,24 @@
-<div class="bg-white max-w-sm rounded overflow-hidden shadow-lg">
+<div class="bg-gray-50 bg-opacity-20 max-w-sm rounded overflow-hidden shadow-lg">
   <div class= "w-full my-3">
     <%= link_to food_path(food.uuid) do %>
-      <%= image_tag food.image_url(:thumb), class: "w-11/12 shadow-lg mx-auto" %>
+      <%= image_tag food.image_url(:thumb), class: "w-11/12 shadow-md mx-auto rounded-sm hover:opacity-70" %>
     <% end %>
   </div>
-  <div class="px-6 pb-4">
+  <div class="px-6 pb-3">
     <div class="font-bold text-xl mb-2">
-    <%= link_to food.name, food_path(food.uuid), class: "hover:text-gray-500" %>
+      <%= link_to food.name, food_path(food.uuid), class: "text-gray-600 hover:text-orange-400" %>
     </div>
   </div>
-  <div class="flex justify-between">
-    <p class="text-gray-700 text-base px-5 pb-2 underline">
-      <i class="fas fa-user-alt"></i><%= link_to food.user.name, user_path(food.user.uuid) %>
-    </p>
-    <div>
-      <% if current_user&.mine?(food) %>
-        <%= render 'update_destroy', food: food  %>
-      <% else %>
-        <%= render 'favorites/favorite_button', food: food  %>
-      <% end %>
-    </div>
+  <div class="ml-7 mb-4">
+    <% if current_user&.mine?(food) %>
+      <%= render 'update_destroy', food: food  %>
+    <% else %>
+      <%= render 'favorites/favorite_button', food: food  %>
+    <% end %>
   </div>
   <div class="px-6 pb-2 mt-2">
     <% food.tags.each do |tag| %>
-      <%= link_to tag.name, foods_path(q: { food_tags: [tag.id] }), class: "inline-block bg-orange-400 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2" %>
+      <%= link_to tag.name, foods_path(q: { food_tags: [tag.id] }), class: "inline-block bg-yellow-100 hover:bg-orange-400 rounded-full px-3 py-1 text-sm font-semibold text-orange-400 hover:text-yellow-100 mr-2 mb-2" %>
     <% end %>
   </div>
 </div>
