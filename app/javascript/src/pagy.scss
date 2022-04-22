@@ -10,7 +10,7 @@
 .page.active,
 .page.prev.disabled,
 .page.next.disabled {
-  @apply block rounded-lg px-3 py-1 text-lg text-orange-500 font-semibold bg-orange-200 shadow-md;
+  @apply block rounded-lg px-3 py-1 text-lg text-orange-500 font-semibold bg-orange-100 shadow-md;
   &:hover{
     @apply bg-orange-300;
   }
