@@ -4,16 +4,16 @@
       <div class="flex-shrink-0">
         <%= image_tag comment.user.avatar.url(:thumb), class: "w-8 h-8 mx-auto shadow-md rounded-full" %>
       </div>
-      <div class="flex-1 min-w-0">
-        <%= link_to comment.user.name, user_path(comment.user.uuid), class: "text-sm font-medium text-gray-900 hover:text-orange-400 truncate dark:text-white" %>
-        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+      <div class="flex-1 min-w-0 text-gray-500">
+        <%= link_to comment.user.name, user_path(comment.user.uuid), class: "text-sm font-medium hover:text-orange-400 truncate dark:text-white" %>
+        <p class="text-sm truncate dark:text-gray-400">
           <%= simple_format(comment.body) %>
         </p>
       </div>
-      <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+      <div class="inline-flex items-center text-base font-semibold dark:text-white">
         <% if current_user.mine?(comment) %>
           <%= link_to comment_path(comment), method: :delete, remote: true, data: { confirm: t('comments.destroy.confirm') } do %>
-            <i class="fas fa-trash-alt mr-2 text-red-700"></i>
+            <i class="fas fa-trash-alt mr-2 text-pink-700"></i>
           <% end %>
         <% end %>
       </div>
