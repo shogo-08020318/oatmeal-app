@@ -1,13 +1,13 @@
-<div class="bg-white shadow-md">
-  <div class="mx-auto w-1/3">
+<div class="bg-gray-50 bg-opacity-70 shadow-md">
+  <div class="mx-auto w-full">
     <div class="flex justify-center py-1">
       <div class="flex h-8 mt-2">
         <%= form_with model: @food_search_form, scope: :q, url: foods_path, method: :get, local: true do |f| %>
-          <%= f.search_field :name, placeholder: 'キーワード', class: "px-4 bg-white border border-orange-500 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
-          <%= f.button :type => "submit", class: "text-white bg-orange-500 px-5 rounded-lg border border-orange-500" do %>
+          <%= f.search_field :name, placeholder: 'キーワード', class: "w-1/2 bg-white px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
+          <%= f.button :type => "submit", class: "text-white bg-orange-400 hover:bg-orange-500 px-5 rounded-lg border border-orange-500" do %>
             <i class="fas fa-search"></i>
           <% end %>
-          <button class="text-gray-600 active:bg-orange-600 font-bold uppercase text-sm px-6 py-1 rounded underline hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
+          <button class="text-gray-600 hover:text-orange-400 font-bold uppercase text-sm px-3 py-1 rounded hover:underline outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
             <%= t('foods.index.detailed_search') %>
           </button>
         <% end %>
@@ -16,91 +16,97 @@
   </div>
 </div>
 
-<div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="modal-id">
+<div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center pt-10" id="modal-id">
   <div class="relative w-auto my-6 mx-auto w-4/5 overflow-y-auto h-5/6">
     <!--content-->
-    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-yellow-50 outline-none focus:outline-none">
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+      <!--close-->
+      <div class="flex items-center justify-end pr-2 rounded-b">
+        <button class="text-red-500 text-5xl uppercase outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
+          <%= t('foods.index.close') %>
+        </button>
+      </div>
       <!--header-->
-      <div class="flex justify-center p-5 rounded-t">
+      <div class="flex justify-center rounded-t pb-3">
         <h3 class="text-3xl font-semibold text-gray-600">
           <%= t('foods.index.detailed_search') %>
         </h3>
       </div>
       <!--search body-->
       <div>
-        <div class="relative lg:px-6">
+        <div class="relative lg:px-6 text-gray-600">
           <%= form_with model: @food_search_form, scope: :q, url: foods_path, method: :get, local: true do |f| %>
-            <div class="flex flex-col px-7 pt-2 border-t border-yellow-400">
+            <div class="flex flex-col px-7 pt-2">
               <div class="grid grid-cols-1 lg:grid-cols-3">
                 <div>
-                  <div class="flex flex-col mb-3">
-                    <%= f.label t('foods.index.free_word'), class: "text-gray-600 font-semibold mb-2 underline" %>
-                    <%= f.search_field :name, placeholder: t('foods.index.key_word'), class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                  <div class="flex flex-col mb-3 lg:pb-2">
+                    <%= f.label t('foods.index.free_word'), class: "font-semibold mb-2 underline" %>
+                    <%= f.search_field :name, placeholder: t('foods.index.key_word'), class: "w-1/2 bg-white shadow-md px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
                   </div>
                   <div class="flex flex-col mb-3">
-                    <%= f.label Ingredient.model_name.human, class: "text-gray-600 font-semibold mb-2 underline" %>
-                    <div class="flex mb-2">
-                      <%= f.search_field :ingredient_name, placeholder: Ingredient.human_attribute_name(:ingredient_name), class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                    <%= f.label Ingredient.model_name.human, class: "font-semibold mb-2 underline" %>
+                    <div class="flex mb-2 lg:pb-2 lg:pt-1">
+                      <%= f.search_field :ingredient_name, placeholder: Ingredient.human_attribute_name(:ingredient_name), class: "w-1/2 bg-white shadow-md px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
                       <p class="pl-1">を含む</p>
                     </div>
                     <div class="flex">
-                      <%= f.search_field :not_ingredient_name, placeholder: Ingredient.human_attribute_name(:ingredient_name), class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                      <%= f.search_field :not_ingredient_name, placeholder: Ingredient.human_attribute_name(:ingredient_name), class: "w-1/2 bg-white shadow-md px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
                       <p class="pl-1">を含まない</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-span-2">
                   <div class="flex flex-col">
-                    <%= f.label t('foods.index.calorie_macro'), class: "text-gray-600 font-semibold mb-2 underline" %>
+                    <%= f.label t('foods.index.calorie_macro'), class: "font-semibold mb-2 underline" %>
                     <div class="flex flex-col mb-3">
                       <div>
-                        <div class="grid grid-cols-1 lg:grid-cols-10">
+                        <div class="grid grid-cols-1 lg:grid-cols-10 lg:pb-2">
                           <%= f.label Nutrition.human_attribute_name(:calories), class: "col-span-2 mr-2" %>
                           <div class="flex mb-2 col-span-4">
-                            <%= f.search_field :over_calories, placeholder: '100', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <%= f.search_field :over_calories, placeholder: '100', class: "w-1/2 bg-white shadow-md px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
                             <p class="pl-1">kcal以上</p>
                           </div>
                           <div class="flex mb-2 col-span-4">
-                            <%= f.search_field :under_calories, placeholder: '200', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <%= f.search_field :under_calories, placeholder: '200', class: "w-1/2 bg-white shadow-md px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
                             <p class="pl-1">kcal以下</p>
                           </div>
                         </div>
                       </div>
                       <div>
-                        <div class="grid grid-cols-1 lg:grid-cols-10">
+                        <div class="grid grid-cols-1 lg:grid-cols-10 lg:pb-2">
                           <%= f.label Nutrition.human_attribute_name(:carbo), class: "col-span-2 mr-2" %>
                           <div class="flex mb-2 col-span-4">
-                            <%= f.search_field :over_carbo, placeholder: '0', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <%= f.search_field :over_carbo, placeholder: '10', class: "w-1/2 bg-white shadow-md px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
                             <p class="pl-1">g以上</p>
                           </div>
                           <div class="flex mb-2 col-span-4">
-                            <%= f.search_field :under_carbo, placeholder: '50', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <%= f.search_field :under_carbo, placeholder: '20', class: "w-1/2 bg-white shadow-md px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
                             <p class="pl-1">g以下</p>
                           </div>
                         </div>
                       </div>
                       <div>
-                        <div class="grid grid-cols-1 lg:grid-cols-10">
+                        <div class="grid grid-cols-1 lg:grid-cols-10 lg:pb-2">
                           <%= f.label Nutrition.human_attribute_name(:protein), class: "col-span-2 mr-2" %>
                           <div class="flex mb-2 col-span-4">
-                            <%= f.search_field :over_protein, placeholder: '0', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <%= f.search_field :over_protein, placeholder: '10', class: "w-1/2 bg-white shadow-md px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
                             <p class="pl-1">g以上</p>
                           </div>
                           <div class="flex mb-2 col-span-4">
-                            <%= f.search_field :under_protein, placeholder: '50', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <%= f.search_field :under_protein, placeholder: '20', class: "w-1/2 bg-white shadow-md px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
                             <p class="pl-1">g以下</p>
                           </div>
                         </div>
                       </div>
                       <div>
-                        <div class="grid grid-cols-1 lg:grid-cols-10">
+                        <div class="grid grid-cols-1 lg:grid-cols-10 lg:pb-2">
                           <%= f.label Nutrition.human_attribute_name(:fat), class: "col-span-2 mr-2" %>
                           <div class="flex mb-2 col-span-4">
-                            <%= f.search_field :over_fat, placeholder: '0', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <%= f.search_field :over_fat, placeholder: '10', class: "w-1/2 bg-white shadow-md px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
                             <p class="pl-1">g以上</p>
                           </div>
                           <div class="flex mb-2 col-span-4">
-                            <%= f.search_field :under_fat, placeholder: '50', class: "w-1/2 px-4 bg-white border border-orange-400 rounded-md sm:mx-2 dark:bg-orange-800 dark:text-orange-300 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-300 focus:outline-none focus:ring focus:ring-orange-300 focus:ring-opacity-40" %>
+                            <%= f.search_field :under_fat, placeholder: '20', class: "w-1/2 bg-white shadow-md px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
                             <p class="pl-1">g以下</p>
                           </div>
                         </div>
@@ -109,26 +115,23 @@
                   </div>
                 </div>
               </div>
-              <div class="flex flex-col">
+              <div class="flex flex-col py-3">
                 <%= f.label Tag.model_name.human, class: "text-gray-600 font-semibold underline" %>
                 <div class="flex flex-wrap gap-2 py-2">
-                  <%= f.collection_check_boxes :food_tags, Tag.all, :id, :name, include_hidden: false, class: "bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" do |b| %>
-                    <%= b.label(class: "w-1/3 lg:w-1/6 bg-yellow-100 border-2 rounded-md border-orange-500 text-orange-500 mr-1 pl-1 mb-1 lg:mb-2") { b.check_box + b.text } %>
+                  <%= f.collection_check_boxes :food_tags, Tag.all, :id, :name, include_hidden: false, class: "bg-white px-4 py-2 rounded-lg focus:outline-none hidden" do |b| %>
+                    <%= b.label do %>
+                      <%= b.check_box(class: "hidden") %>
+                        <span class="w-2/5 lg:w-1/3 bg-yellow-100 rounded-full text-orange-400 font-semibold px-3 py-1 mb-4 text-center"><%= b.text %></span>
+                    <% end %>
                   <% end %>
                 </div>
               </div>
-              <div class="flex justify-center border-t border-yellow-400 pt-2">
-                <%= f.submit t('foods.index.search'), class: "cursor-pointer w-1/2 lg:w-1/6 text-white text-lg bg-orange-500 px-3 rounded-lg border border-orange-500 my-2 py-1" %>
+              <div class="flex justify-center pt-2 pb-3">
+                <%= f.submit t('foods.index.search'), class: "cursor-pointer w-1/2 lg:w-1/6 text-white text-lg bg-orange-500 px-2 rounded-lg border border-orange-500 my-2 py-1" %>
               </div>
             </div>
           <% end %>
         </div>
-      </div>
-      <!--footer-->
-      <div class="flex items-center justify-end pr-2 pb-2 rounded-b">
-        <button class="text-white bg-red-500 rounded-md font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
-          <%= t('foods.index.close') %>
-        </button>
       </div>
     </div>
   </div>
@@ -143,3 +146,11 @@
     document.getElementById(modalID + "-backdrop").classList.toggle("flex");
   }
 </script>
+
+<style>
+  label input[type="checkbox"]:checked + span {
+    background-color: #fb923c;
+    color: #fef9c3;
+    border-color: #fed7aa;
+  }
+</style>

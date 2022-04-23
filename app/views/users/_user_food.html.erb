@@ -1,4 +1,4 @@
-<%= link_to food_path(user_food.uuid), class: "mb-5 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700" do %>
+<%= link_to food_path(user_food.uuid), class: "mb-5 flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700" do %>
   <%= image_tag user_food.image_url(:thumb), class: "object-cover w-full h-36 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" %>
   <div class="flex flex-col justify-between p-4 leading-normal">
       <h5 class="mb-2 text-lg lg:text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= user_food.name %></h5>

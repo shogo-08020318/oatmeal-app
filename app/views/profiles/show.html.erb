@@ -1,9 +1,9 @@
 <% content_for(:title, t('.title')) %>
 
 <div class="flex justify-center items-center py-16">
-  <div class="lg:w-3/5 md:w-1/2 w-11/12">
+  <div class="lg:w-3/5 md:w-3/4 w-11/12">
     <div class="px-4 pt-3 pb-5 sm:px-6">
-      <div class="text-xl lg:text-3xl lg:text-2xl text-center leading-6 font-medium text-gray-600 font-bold"><%= t('.title') %></div>
+      <div class="text-xl md:text-2xl lg:text-3xl text-center leading-6 font-medium text-gray-500 font-bold"><%= t('.title') %></div>
     </div>
     <div class= "bg-white p-4 lg:p-10 rounded-lg shadow-lg min-w-full">
       <%= image_tag current_user.avatar.url, class: "w-32 h-32 mx-auto shadow-lg rounded-full mb-5" %>
@@ -11,30 +11,49 @@
         <dl>
           <div class="px-4 py-3 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
             <dt class="font-medium text-gray-500">
-              <%= User.human_attribute_name(:name) %>
+              <i class="far fa-user text-3xl"></i>
             </dt>
-            <dd class="mt-1 text-gray-900 sm:mt-0">
+            <dd class="mt-1 text-gray-500 sm:mt-0 pt-1">
               <%= current_user.name %>
             </dd>
           </div>
           <div class="px-4 py-3 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6 border-t border-gray-200">
             <dt class="font-medium text-gray-500">
-              <%= User.human_attribute_name(:email) %>
+              <i class="far fa-envelope text-3xl"></i>
             </dt>
-            <dd class="mt-1 text-gray-900 sm:mt-0">
+            <dd class="mt-1 text-gray-500 sm:mt-0">
               <%= current_user.email %>
             </dd>
           </div>
           <div class="px-4 pt-8 pb-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6 border-t border-gray-200">
             <dd class="mt-1 text-gray-900 sm:mt-0">
-              <%= link_to t('.user_show'), user_path(current_user.uuid), class: "text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg px-5 py-2.5 text-center m-4 mb-2" %>
+              <%= link_to user_path(current_user.uuid), class: "px-5 py-2.5 text-center m-4 mb-2 text-gray-500 hover:text-cyan-300", onmouseenter: "openPopover(event,'user-show')", onmouseleave: "openPopover(event,'user-show')" do %>
+                <i class="fas fa-id-card text-2xl lg:text-5xl md:mt-2 lg:mt-0"></i><span class="lg:hidden pl-2"><%= '詳細' %></span>
+              <% end %>
             </dd>
             <dd class="mt-1 text-gray-900 sm:mt-0">
-              <%= link_to t('.update'), edit_profile_path, class: "text-white bg-gradient-to-r from-lime-400 via-lime-500 to-lime-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg px-5 py-2.5 text-center m-4 mb-2" %>
+              <%= link_to edit_profile_path, class: "px-5 py-2.5 text-center m-4 mb-2 text-gray-500 hover:text-lime-300", onmouseenter: "openPopover(event,'user-edit')", onmouseleave: "openPopover(event,'user-edit')" do %>
+                <i class="fas fa-user-edit text-2xl lg:text-4xl mt-2"></i><span class="lg:hidden pl-2"><%= '編集' %></span>
+              <% end %>
             </dd>
           </div>
         </dl>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="hidden bg-white border-0 mb-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg" id="user-show">
+  <div>
+    <div class="bg-cyan-500 text-white font-semibold p-2 px-5 mb-0 border-b border-solid border-blueGray-100 uppercase rounded-lg">
+      <%= '詳細' %>
+    </div>
+  </div>
+</div>
+<div class="hidden bg-white border-0 mb-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg" id="user-edit">
+  <div>
+    <div class="bg-lime-500 text-white font-semibold p-2 px-5 mb-0 border-b border-solid border-blueGray-100 uppercase rounded-lg">
+      <%= '編集' %>
     </div>
   </div>
 </div>
