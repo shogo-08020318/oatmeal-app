@@ -1,17 +1,188 @@
 <div>
-  <div class="container mx-auto flex flex-col items-center py-5 sm:py-24 pt-40">
-    <div class="w-full sm:w-2/3 lg:flex justify-center items-center flex-col mb-20 sm:mb-20">
-      <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center text-gray-800 font-black leading-7 md:leading-10">
-        <span class="text-orange-600">オートミール</span>
-        に特化したレシピ共有サービス
-      </h1>
-    </div>
-    <div class="flex justify-center items-center flex-col">
-      <% unless logged_in? %>
-        <%= link_to 'ユーザー登録', new_user_path, class: "w-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 bg-orange-500 transition duration-150 ease-in-out hover:bg-orange-600 lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-orange-500 py-2 sm:py-4 text-sm mb-5 text-center" %>
-        <%= link_to 'ログイン', login_path, class: "w-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 bg-orange-500 transition duration-150 ease-in-out hover:bg-orange-600 lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-orange-500 py-2 sm:py-4 text-sm mb-5 text-center" %>
+  <div>
+    <%= image_pack_tag 'top.png' %>
+  </div>
+  <div class="pt-10 lg:pt-20 pb-5">
+    <p class="text-center text-sm md:text-xl lg:text-2xl text-gray-700 mx-6 md:mx-16 lg:mx-0">
+      低カロリーで、栄養が豊富なことから最近注目を集めているオートミール。<br>様々なレシピを試して楽しみながら健康的な食生活を送ってみませんか？
+    </p>
+  </div>
+  <div class="pt-4 md:pt-6 lg:pt-10 pb-5 text-center">
+    <p class="text-sm md:text-xl lg:text-2xl text-gray-700">
+      まずはレシピを見てみることから
+    </p>
+    <div class="my-2 md:my-4 lg:my-5 flex justify-center">
+      <%= link_to foods_path do %>
+        <div class="cursor-pointer text-white bg-gradient-to-r from-yellow-400 hover:from-yellow-300 via-orange-400 hover:via-orange-300 to-orange-600 hover:to-orange-400 hover:bg-gradient-to-br focus:ring-4 focus:ring-orange-300 dark:focus:ring-orange-800 rounded-lg text-sm md:text-md lg:text-xl px-3 lg:px-5 py-1.5 lg:py-2.5 text-center mr-2 mb-2">
+          <p>レシピ一覧へ<i class="fas fa-utensils"></i></p>
+        </div>
       <% end %>
-      <%= link_to 'レシピ一覧ページへ', foods_path, class: "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 bg-transparent transition duration-150 ease-in-out hover:border-orange-600 hover:bg-orange-600 lg:text-xl lg:font-bold  hover:text-orange-100 rounded border border-orange-500 text-orange-500 px-4 sm:px-10 py-2 sm:py-4 text-sm" %>
+    </div>
+  </div>
+
+  <div class="bg-cover h-40 lg:h-64 flex items-center justify-center bg-left" style="background-image: url(<%= asset_pack_path('media/images/top_login.png') %>)">
+    <div class="text-center">
+      <% if logged_in? %>
+        <p class="text-md lg:text-xl text-white pb-5 ">レシピを投稿してみましょう。</p>
+        <div class="flex justify-center">
+          <%= link_to new_food_path do %>
+            <div class= "cursor-pointer text-white bg-gradient-to-r from-yellow-400 hover:from-yellow-300 via-orange-400 hover:via-orange-300 to-orange-600 hover:to-orange-400 hover:bg-gradient-to-br focus:ring-4 focus:ring-orange-300 dark:focus:ring-orange-800 rounded-lg text-sm md:text-md lg:text-xl px-3 lg:px-5 py-1.5 lg:py-2.5 text-center mr-2 mb-2" >
+              <p>レシピを投稿する<i class="fas fa-edit"></i></p>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-md lg:text-xl text-white pb-5 ">アカウント登録するとレシピをお気に入り登録できます。</p>
+        <div class="flex justify-center">
+          <%= link_to new_user_path do %>
+            <div class= "cursor-pointer text-white bg-gradient-to-r from-yellow-400 hover:from-yellow-300 via-orange-400 hover:via-orange-300 to-orange-600 hover:to-orange-400 hover:bg-gradient-to-br focus:ring-4 focus:ring-orange-300 dark:focus:ring-orange-800 rounded-lg text-sm md:text-md lg:text-xl px-3 lg:px-5 py-1.5 lg:py-2.5 text-center mr-2 mb-2" >
+              <p>アカウント登録する<i class="fas fa-user-plus"></i></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="my-8 lg:my-16">
+    <div class="text-center my-7 lg:my-12">
+      <p class="text-3xl md:text-4xl lg:text-5xl text-gray-700">『<span class="text-orange-500">オートミール</span>』<span class="text-2xl md:text-3xl lg:text-4xl">の特徴</span></p>
+    </div>
+    <div class="m-2 lg:m-7 tracking-widest">
+      <div class="grid grid-cols-2 lg:mx-40 my-4 lg:my-10 gap-4 lg:gap-8">
+        <div>
+          <%= image_pack_tag "top_nutrition.png", class: "float-left lg:w-full" %>
+        </div>
+        <div class="md:pt-8 lg:pt-14">
+          <div class="text-gray-700 text-left">
+            <p class="text-lg md:text-3xl lg:text-4xl md:my-2 lg:my-5">
+              栄養が豊富
+            </p>
+            <p class="text-xs md:text-lg lg:text-xl racking-wide lg:pr-0">
+              食物繊維やタンパク質に加え、普段なかなか摂ることができないビタミン・ミネラルなど栄養が豊富<br><span class="text-orange-500">低カロリー</span>だからダイエットにもおすすめ
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 lg:mx-40 my-4 lg:my-10 gap-4 lg:gap-8">
+        <div>
+          <%= image_pack_tag "top_short_time.png", class: "float-right lg:w-full" %>
+        </div>
+        <div class="order-first md:pt-14">
+          <div class="text-gray-700 text-left">
+            <p class="text-lg md:text-3xl lg:text-4xl md:my-2 lg:my-5">
+              調理が簡単
+            </p>
+            <p class="text-xs md:text-lg lg:text-xl leading-relaxed">
+              調理が簡単でほとんど時間が掛からないので<span class="text-orange-500">時短</span>になる<br>忙しい時や、朝食などにおすすめ
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 lg:mx-40 my-4 lg:my-10 gap-4 lg:gap-8">
+        <div>
+          <%= image_pack_tag "top_delicious.png", class: "float-left lg:w-full" %>
+        </div>
+        <div class="md:pt-12 lg:pt-14">
+          <div class="text-gray-700 text-left">
+            <p class="text-lg md:text-3xl lg:text-4xl md:my-2 lg:my-5">
+              美味しい
+            </p>
+            <p class="text-xs md:text-lg lg:text-xl leading-relaxed">
+              お米の代わりにしてご飯ものにしたり、スイーツにもできる<br>好きなように<span class="text-orange-500">アレンジ</span>できるから飽きずに美味しく食べ続けることができる
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="my-10 lg:my-20">
+      <div class="text-center">
+        <p class="mb-3 lg:my-7 text-md md:text-lg lg:text-xl text-gray-700">さらに詳しく知りたい方はこちら↓</p>
+        <%= link_to 'オートミールの詳しい情報を見る', '#', class: "cursor-pointer text-white bg-gradient-to-r from-yellow-400 hover:from-yellow-300 via-orange-400 hover:via-orange-300 to-orange-600 hover:to-orange-400 hover:bg-gradient-to-br focus:ring-4 focus:ring-orange-300 dark:focus:ring-orange-800 rounded-lg text-sm md:text-lg lg:text-xl px-3 lg:px-5 py-1.5 lg:py-2.5 text-center mr-2 mb-2" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-36 flex items-center justify-center text-center text-gray-600" style="background-image: url(<%= asset_pack_path('media/images/top_foods.png') %>)">
+    <div class="md:mt-20 lg:mt-32 w-5/6 md:w-11/12 lg:w-4/5 bg-white shadow-md">
+      <div class="py-3 md:py-6 lg:py-10">
+        <p class="text-xl md:text-2xl lg:text-3xl">このサービスの使い方</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x">
+        <div class="px-3 lg:p-5">
+          <div class="grid grid-cols-2 md:grid-cols-1 px-10">
+            <div class="text-4xl lg:text-6xl text-gray-300 flex items-center justify-center">
+              <i class="fas fa-search-plus"></i>
+            </div>
+            <div class="my-5 lg:my-7">
+              <p class="text-xl lg:text-3xl">
+                1.見る
+              </p>
+            </div>
+          </div>
+          <div>
+            <p class="text-md lg:text-xl mb-2">
+              どんなレシピがあるのか見てみましょう。
+            </p>
+          </div>
+        </div>
+        <div class="px-3 lg:p-5">
+          <div class="grid grid-cols-2 md:grid-cols-1 px-10">
+            <div class="text-4xl lg:text-6xl text-gray-300 flex items-center justify-center">
+              <i class="fas fa-utensils"></i>
+            </div>
+            <div class="my-5 lg:my-7">
+              <p class="text-xl lg:text-3xl">
+                2.食べる
+              </p>
+            </div>
+          </div>
+          <div>
+            <p class="text-md lg:text-xl mb-2">
+              自分なりにアレンジして食べてみましょう。
+            </p>
+          </div>
+        </div>
+        <div class="px-3 lg:p-5">
+          <div class="grid grid-cols-2 md:grid-cols-1 px-10">
+            <div class="text-4xl lg:text-6xl text-gray-300 flex items-center justify-center">
+              <i class="fas fa-edit"></i>
+            </div>
+            <div class="my-5 lg:my-7">
+              <p class="text-xl lg:text-3xl">
+                3.シェアする
+              </p>
+            </div>
+          </div>
+          <div>
+            <p class="text-md lg:text-xl mb-2">
+              レシピを投稿してみんなにシェアしましょう。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-cover h-52 lg:h-80 flex items-center justify-center mb-20" style="background-image: url(<%= asset_pack_path('media/images/top_search.png') %>)">
+    <div class="text-lg lg:text-2xl text-white">
+      <p class="mb-5 mx-10 lg:mx-6 text-center">お気に入りのレシピを探してみませんか？</p>
+      <div class="bg-gray-50 bg-opacity-70 shadow-md h-24 lg:h-14">
+        <div class="w-full">
+          <div class="py-1">
+            <div class="h-10 mt-2">
+              <%= form_with model: @food_search_form, scope: :q, url: foods_path, method: :get, local: true do |f| %>
+                <div class="grid grid-cols-1 lg:grid-cols-9 px-3">
+                  <%= f.search_field :name, placeholder: 'キーワード', class: "lg:col-span-7 bg-white px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
+                  <%= f.button :type => "submit", class: "lg:col-span-2 w-1/3 lg:w-full mt-3 lg:mt-0 mx-auto lg:mx-0 text-white bg-orange-400 hover:bg-orange-500 px-5 rounded-lg" do %>
+                    <i class="fas fa-search"></i>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
