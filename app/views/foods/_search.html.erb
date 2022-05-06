@@ -1,13 +1,13 @@
-<div class="bg-gray-50 bg-opacity-70 shadow-md">
+<div class="bg-yellow-50 shadow-md">
   <div class="mx-auto w-full">
     <div class="flex justify-center py-1">
       <div class="flex h-8 mt-2">
         <%= form_with model: @food_search_form, scope: :q, url: foods_path, method: :get, local: true do |f| %>
           <%= f.search_field :name, placeholder: 'キーワード', class: "w-1/2 bg-white px-4 rounded-md focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-80" %>
-          <%= f.button :type => "submit", class: "text-white bg-orange-400 hover:bg-orange-500 px-5 rounded-lg border border-orange-500" do %>
+          <%= f.button :type => "submit", class: "text-white bg-orange-400 hover:bg-orange-500 px-5 rounded-lg" do %>
             <i class="fas fa-search"></i>
           <% end %>
-          <button class="text-gray-600 hover:text-orange-400 font-bold uppercase text-sm px-3 py-1 rounded hover:underline outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
+          <button class="text-gray-600 hover:text-orange-400 text-sm px-3 py-1 rounded hover:underline outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
             <%= t('foods.index.detailed_search') %>
           </button>
         <% end %>
