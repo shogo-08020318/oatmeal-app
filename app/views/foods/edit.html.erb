@@ -1,9 +1,9 @@
 <% content_for(:title, t('.title')) %>
 
 <div class="flex justify-center items-center py-10">
-	<div class="lg:w-4/5 md:w-1/2 w-11/12">
-		<%= form_with model: @form, url: food_path(@food.uuid), local: true, class: "bg-gray-50 p-5 rounded-lg shadow-lg min-w-full" do |f| %>
-			<h1 class="text-center text-2xl mb-6 text-gray-600 font-bold"><%= t('.title') %></h1>
+  <div class="lg:w-4/5 md:w-1/2 w-11/12">
+    <%= form_with model: @form, url: food_path(@food.uuid), local: true, class: "bg-gray-50 p-5 rounded-lg shadow-lg min-w-full" do |f| %>
+      <h1 class="text-center text-2xl mb-6 text-gray-600 font-bold"><%= t('.title') %></h1>
       <%= render 'shared/error_messages', object: f.object %>
       <div class="flex justify-center">
         <div class="w-full lg:w-2/3">
