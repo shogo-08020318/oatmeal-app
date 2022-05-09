@@ -3,7 +3,7 @@
 <div class="flex justify-center items-center py-10">
   <div class="lg:w-2/5 md:w-2/3 w-11/12">
     <%= form_with model: @user, local: true, class: "bg-gray-50 p-5 lg:p-10 rounded-lg shadow-lg min-w-full" do |f| %>
-      <h1 class="text-center text-2xl mb-6 text-gray-600 font-bold font-sans"><%= t('.title') %></h1>
+      <h1 class="text-center text-2xl mb-6 text-gray-600 font-bold"><%= t('.title') %></h1>
       <%= render 'shared/error_messages', object: f.object %>
       <div>
         <%= f.label :name, class: "text-gray-600 font-semibold block my-3 text-md" %>
@@ -22,12 +22,12 @@
         <%= f.password_field :password_confirmation, class: "w-full bg-white px-4 py-2 rounded-lg focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring focus:ring-orange-400 focus:ring-opacity-80", placeholder: "password" %>
       </div>
       <div class="w-3/4 md:w-2/3 lg:w-1/2 mx-auto pt-4">
-        <%= f.submit class: "w-full mt-6 bg-orange-400 hover:bg-orange-600 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans" %>
-        <%= link_to auth_at_provider_path(provider: :twitter), class: 'w-full text-white bg-cyan-400 hover:bg-cyan-600 focus:ring-4 focus:ring-cyan-100 font-medium rounded-lg text-md px-5 py-2.5 text-center inline-flex flex justify-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 mt-5 font-semibold font-sans' do %>
+        <%= f.submit class: "w-full mt-6 bg-orange-400 hover:bg-orange-600 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold" %>
+        <%= link_to auth_at_provider_path(provider: :twitter), class: 'w-full text-white bg-cyan-400 hover:bg-cyan-600 focus:ring-4 focus:ring-cyan-100 font-medium rounded-lg text-md px-5 py-2.5 text-center inline-flex flex justify-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 mt-5 font-semibold' do %>
           <p><i class="fab fa-twitter"></i><%= t('.twitter_register') %></p>
         <% end %>
       </div>
     <% end %>
-    <%= link_to t('defaults.already_acount'), login_path, class: "flex justify-center items-center mt-6 mb-3 text-sm lg:text-lg text-orange-400 hover:text-orange-600 tracking-wide font-semibold font-sans hover:underline" %>
+    <%= link_to t('defaults.already_acount'), login_path, class: "flex justify-center items-center mt-6 mb-3 text-sm lg:text-lg text-orange-400 hover:text-orange-600 tracking-wide font-semibold hover:underline" %>
   </div>
 </div>

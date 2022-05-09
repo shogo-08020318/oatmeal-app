@@ -3,7 +3,7 @@
 <div class="flex justify-center items-center py-16">
   <div class="lg:w-2/5 md:w-1/2 md:w-2/3 w-11/12">
     <%= form_with model: @user, url: profile_path, local: true, class: "bg-gray-50 p-5 lg:p-10 rounded-lg shadow-lg min-w-full" do |f| %>
-      <h1 class="text-center text-2xl mb-6 text-gray-600 font-bold font-sans"><%= t('.title') %></h1>
+      <h1 class="text-center text-2xl mb-6 text-gray-600 font-bold"><%= t('.title') %></h1>
       <%= render 'shared/error_messages', object: f.object %>
       <div>
         <%= f.label :name, class: "text-gray-600 font-semibold block my-3 text-md" %>
@@ -20,10 +20,10 @@
         <%= image_tag @user.avatar_url, class: 'w-32 h-32 shadow-lg rounded-full m-5', id: 'preview' %>
       </div>
       <div class="w-3/4 md:w-2/3 lg:w-1/2 mx-auto">
-        <%= f.submit class: "w-full mt-6 bg-orange-400 hover:bg-orange-600 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans cursor-pointer" %>
+        <%= f.submit class: "w-full mt-6 bg-orange-400 hover:bg-orange-600 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold cursor-pointer" %>
       </div>
     <% end %>
-	</div>
+  </div>
 </div>
 
 <script>

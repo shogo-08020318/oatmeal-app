@@ -26,14 +26,14 @@
             </dd>
           </div>
           <div class="px-4 pt-8 pb-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6 border-t border-gray-200">
-            <dd class="mt-1 text-gray-900 sm:mt-0">
-              <%= link_to user_path(current_user.uuid), class: "px-5 py-2.5 text-center m-4 mb-2 text-gray-500 hover:text-cyan-300", onmouseenter: "openPopover(event,'user-show')", onmouseleave: "openPopover(event,'user-show')" do %>
-                <i class="fas fa-id-card text-2xl lg:text-5xl md:mt-2 lg:mt-0"></i><span class="lg:hidden pl-2"><%= '詳細' %></span>
+            <dd class="mt-1 mb-5 md:mb-0">
+              <%= link_to user_path(current_user.uuid), class: "text-white bg-gradient-to-r from-cyan-300 hover:from-cyan-400 via-cyan-400 hover:via-cyan-500 to-cyan-500 hover:to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg px-3 lg:px-2 py-2 text-center m-4 mb-2" do %>
+                <i class="fas fa-id-card text-2xl lg:text-4xl md:mt-2 lg:mt-0 lg:pt-3"></i><span><%= '詳細' %></span>
               <% end %>
             </dd>
-            <dd class="mt-1 text-gray-900 sm:mt-0">
-              <%= link_to edit_profile_path, class: "px-5 py-2.5 text-center m-4 mb-2 text-gray-500 hover:text-lime-300", onmouseenter: "openPopover(event,'user-edit')", onmouseleave: "openPopover(event,'user-edit')" do %>
-                <i class="fas fa-user-edit text-2xl lg:text-4xl mt-2"></i><span class="lg:hidden pl-2"><%= '編集' %></span>
+            <dd class="mt-1.5">
+              <%= link_to edit_profile_path, class: "text-white bg-gradient-to-r from-lime-300 hover:from-lime-400 via-lime-400 hover:via-lime-500 to-lime-500 hover:to-lime-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg px-3 py-2 text-center m-4 mb-2" do %>
+                <i class="fas fa-user-edit text-2xl lg:text-2xl mt-2"></i><span><%= '編集' %></span>
               <% end %>
             </dd>
           </div>

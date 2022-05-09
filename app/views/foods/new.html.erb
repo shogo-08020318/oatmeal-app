@@ -1,9 +1,9 @@
 <% content_for(:title, t('.title')) %>
 
 <div class="flex justify-center items-center py-10">
-	<div class="w-full md:w-4/5 lg:w-4/5">
-		<%= form_with model: @form, local: true, class: "bg-gray-50 p-2 lg:p-5 rounded-lg shadow-lg min-w-full" do |f| %>
-			<h1 class="text-center text-2xl mb-6 text-gray-600 font-bold font-sans"><%= t('.title') %></h1>
+  <div class="w-full md:w-4/5 lg:w-4/5">
+    <%= form_with model: @form, local: true, class: "bg-gray-50 p-2 lg:p-5 rounded-lg shadow-lg min-w-full" do |f| %>
+      <h1 class="text-center text-2xl mb-6 text-gray-600 font-bold"><%= t('.title') %></h1>
       <%= render 'shared/error_messages', object: f.object %>
       <div class="flex justify-center">
         <div class="w-full lg:w-2/3">
@@ -80,7 +80,7 @@
         </div>
       </div>
       <div class="text-center">
-        <%= f.submit class: "cursor-pointer w-1/2 lg:w-1/4 mt-6 mb-2 lg:mb-0 bg-orange-400 hover:bg-orange-600 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans" %>
+        <%= f.submit class: "cursor-pointer w-1/2 lg:w-1/4 mt-6 mb-2 lg:mb-0 bg-orange-400 hover:bg-orange-600 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold" %>
       </div>
 
       <script type="text/javascript">
