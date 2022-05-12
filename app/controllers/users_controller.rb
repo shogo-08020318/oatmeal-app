@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(uuid: params[:uuid])
+    @recommend_foods = @user.recommend
   end
 
   def new

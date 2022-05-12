@@ -65,12 +65,49 @@ class User < ApplicationRecord
   def favorite?(food)
     favorite_foods.include?(food)
   end
-end
 
-# emailのフォーマットをチェックするか判断するためのメソッド
-def twitter_user_check
-  # twitter_idが存在するならemailのフォーマットのチェックはしない
-  return false if twitter_id.present?
+  # emailのフォーマットをチェックするか判断するためのメソッド
+  def twitter_user_check
+    # twitter_idが存在するならemailのフォーマットのチェックはしない
+    return false if twitter_id.present?
 
-  true
+    true
+  end
+
+  # おすすめレシピの取得
+  def recommend
+    # おすすめレシピ格納用
+    result = []
+    # おすすめレシピの数
+    recommend_count = 5
+    # 除外するレシピを保持する用
+    not_recommend = []
+    # 自分のレシピ、お気に入りしたレシピは除外する
+    not_recommend.push(food_ids, favorite_food_ids)
+    # お気に入りレシピを基におすすめを抽出
+    result << favo_post_recommend(not_recommend, favorite_foods, recommend_count) if favorite_foods.present?
+    # そのユーザーが投稿したレシピを基におすすめを抽出
+    not_recommend.clear.push(food_ids, favorite_food_ids, result.flatten.uniq.pluck(:id)).flatten!
+    result << favo_post_recommend(not_recommend, foods, recommend_count - result.flatten.uniq.count) if result.flatten.count < 5 && foods.present?
+    # 全レシピの中からランダムでおすすめを抽出
+    not_recommend.clear.push(food_ids, favorite_food_ids, result.flatten.uniq.pluck(:id)).flatten!
+    result << random_recommend(not_recommend, recommend_count - result.flatten.uniq.count) if result.flatten.count < 5
+
+    result.flatten
+  end
+
+  def favo_post_recommend(not_recommend, foods, count)
+    food_tags = []
+    # それぞれのレシピにタグがあれば配列に追加
+    foods.each { |food| food_tags << food.tag_ids if food.tags.present? }
+    # タグごとに数をカウント
+    tags_hash = food_tags.flatten.tally
+    # 最も数が多いタグを使っておすすめを抽出
+    Food.distinct.joins(:food_tags).where(food_tags: { tag_id: tags_hash.key(tags_hash.values.max) }).where.not(id: not_recommend).sample(count)
+  end
+
+  def random_recommend(not_recommend, count)
+    # 全体から自分のレシピ等は除外して残ったものの中からおすすめを抽出
+    Food.where.not(id: not_recommend).sample(count)
+  end
 end
