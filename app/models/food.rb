@@ -58,4 +58,18 @@ class Food < ApplicationRecord
   scope :over_fat, ->(over_fat) { where('nutritions.fat / serving >= ?', over_fat) }
   # 脂質で検索（以下）
   scope :under_fat, ->(under_fat) { where('nutritions.fat / serving <= ?', under_fat) }
+
+  # 関連するレシピの取得
+  def relevance
+    # 関連するレシピを格納
+    relevance_foods = []
+    # そのレシピのタグをランダムで使って同じタグを含むレシピを取得
+    relevance_foods << Food.distinct.joins(:tags).where.not(id: id).where(tags: { id: tag_ids.sample }).sample(6) if tags.present?
+
+    # 上記で取得したレシピの数が5個未満なら材料を使って5個になるように追加
+    # そのレシピ自身は除外、同じ材料を使って関連するレシピを取得
+    relevance_foods << Food.distinct.joins(:ingredients).where.not(id: id).where(ingredients: { ingredient_name: (ingredients.pluck(:ingredient_name) - ['オートミール']).sample }).sample(6 - relevance_foods.count) if relevance_foods.flatten!.count <= 5
+
+    relevance_foods.flatten!
+  end
 end

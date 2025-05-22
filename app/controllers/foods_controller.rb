@@ -14,6 +14,7 @@ class FoodsController < ApplicationController
     gon.nutrition_calories = @food.nutrition.calorie_calculates(@food.serving)
     @comment = Comment.new
     @comments = @food.comments.includes(:user).order(created_at: :desc)
+    @relevance_foods = @food.relevance
   end
 
   def new
