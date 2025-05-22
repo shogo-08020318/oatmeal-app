@@ -22,6 +22,7 @@ ja:
       user_recipes: 投稿一覧
       no_foods: 投稿したレシピはありません。
       no_favorites: お気に入り登録したレシピはありません。
+      recommend: おすすめ
   user_sessions:
     new:
       title: ログイン

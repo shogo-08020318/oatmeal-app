@@ -129,7 +129,7 @@
         </div>
       </div>
     </div>
-    <div class="m-3 lg:m-10 pt-7 border-t-2 border-orange-200">
+    <div class="m-3 lg:m-10 py-7 border-t-2 border-orange-200">
       <div class="grid grid-cols-1 lg:grid-cols-2">
         <div class="lg:mx-5">
           <%= render 'comments/form', { food: @food, comment: @comment } %>
@@ -145,6 +145,18 @@
               <p class="text-gray-500"><%= t('.no_comment') %></p>
             <% end %>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="m-3 lg:m-10 pt-7 border-t-2 border-orange-200">
+      <div class="text-center">
+        <p class="text-gray-600 text-3xl">
+          あなたにおすすめのレシピ
+        </p>
+      </div>
+      <div class="">
+        <div class="py-5 grid grid-cols-3 mx-48">
+          <%= render partial: 'relevance_food', collection: @relevance_foods %>
         </div>
       </div>
     </div>

@@ -21,21 +21,26 @@
             <div class="w-full">
               <ul class="flex mb-0 list-none flex-wrap flex-row">
                 <li class="-mb-px last:mr-0 flex-auto text-center">
-                  <a class="text-md md:text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-white bg-orange-400" onclick="changeAtiveTab(event,'tab-profile')">
+                  <a class="text-md md:text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-white bg-orange-400" onclick="changeAtiveTab(event,'tab-foods')">
                     <%= t('.user_recipes') %>
                   </a>
                 </li>
                 <li class="-mb-px last:mr-0 flex-auto text-center">
-                  <a class="text-md md:text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-orange-400 bg-white" onclick="changeAtiveTab(event,'tab-settings')">
+                  <a class="text-md md:text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-orange-400 bg-white" onclick="changeAtiveTab(event,'tab-favorite')">
                     <%= Favorite.model_name.human %>
+                  </a>
+                </li>
+                <li class="-mb-px last:mr-0 flex-auto text-center">
+                  <a class="text-md md:text-lg font-bold uppercase px-5 py-2 shadow-lg rounded block leading-normal text-orange-400 bg-white" onclick="changeAtiveTab(event,'tab-recommend')">
+                    <%= t('.recommend') %>
                   </a>
                 </li>
               </ul>
               <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded border-2 border-orange-400">
                 <div class="flex-auto">
                   <div class="tab-content tab-space">
-                    <div class="block" id="tab-profile">
-                      <div class="p-5 overflow-y-auto h-96 bg-yellow-50">
+                    <div class="block" id="tab-foods">
+                      <div class="p-5 overflow-y-auto h-96">
                         <% if @user.foods.present? %>
                           <%= render partial: 'user_food', collection: @user.foods %>
                         <% else %>
@@ -45,8 +50,8 @@
                         <% end %>
                       </div>
                     </div>
-                    <div class="hidden" id="tab-settings">
-                      <div class="p-5 overflow-y-auto h-96 bg-yellow-50">
+                    <div class="hidden" id="tab-favorite">
+                      <div class="p-5 overflow-y-auto h-96">
                         <% if @user.favorite_foods.present? %>
                           <%= render partial: 'user_food', collection: @user.favorite_foods %>
                         <% else %>
@@ -54,6 +59,11 @@
                             <%= t('.no_favorites') %>                        
                           </div>
                         <% end %>
+                      </div>
+                    </div>
+                    <div class="hidden" id="tab-recommend">
+                      <div class="p-5 overflow-y-auto h-96">
+                        <%= render partial: 'user_food', collection: @recommend_foods %>
                       </div>
                     </div>
                   </div>
