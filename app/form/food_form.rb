@@ -2,7 +2,7 @@ class FoodForm
   include ActiveModel::Model
   require 'google/cloud/translate'
 
-  attr_accessor :food, :name, :image, :recipe, :cooking_comment, :cooking_time, :cooking_time_unit, :serving, :user_id, :food_tags, :food_id, :tag_id, :ingredients, :ingredient_name, :quantity, :proper_quantity
+  attr_accessor :food, :name, :image, :recipe, :cooking_comment, :cooking_time, :serving, :user_id, :food_tags, :food_id, :tag_id, :ingredients, :ingredient_name, :quantity, :proper_quantity
 
   validate :food_validate
   validate :ingredient_validate
@@ -65,7 +65,6 @@ class FoodForm
       recipe: @food.recipe,
       cooking_comment: @food.cooking_comment,
       cooking_time: @food.cooking_time,
-      cooking_time_unit: @food.cooking_time_unit,
       serving: @food.serving,
       food_tags: @food.tags,
       ingredients: @food.ingredients
@@ -79,7 +78,6 @@ class FoodForm
       recipe: recipe,
       cooking_comment: cooking_comment,
       cooking_time: cooking_time,
-      cooking_time_unit: cooking_time_unit,
       serving: serving,
       user_id: user_id
     }

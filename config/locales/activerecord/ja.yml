@@ -22,7 +22,6 @@ ja:
         image: 料理写真
         cooking_comment: コメント
         cooking_time: 調理時間
-        cooking_time_unit: 調理時間の単位
         serving: 何人前
       tag:
         name: タグ
@@ -46,16 +45,9 @@ ja:
         image: 料理写真
         cooking_comment: コメント
         cooking_time: 調理時間
-        cooking_time_unit: 調理時間の単位
         serving: 何人前
         tag: タグ
         ingredient: 材料
         ingredient_name: 材料名
         quantity: 量
         proper_quantity: 適量
-  enums:
-    food:
-      cooking_time_unit:
-        seconds: 秒
-        minutes: 分
-        hours: 時間
