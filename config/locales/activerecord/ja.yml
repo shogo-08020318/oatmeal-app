@@ -51,3 +51,11 @@ ja:
         ingredient_name: 材料名
         quantity: 量
         proper_quantity: 適量
+  enums:
+    food:
+      cooking_time:
+        under_five_minutes: 5分未満
+        ten_minutes: 10分
+        thirty_minutes: 30分
+        one_hour: 1時間
+        overnight: 一晩

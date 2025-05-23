@@ -32,6 +32,9 @@ class Food < ApplicationRecord
   # 投稿の保存直前にuuidを生成
   before_create -> { self.uuid = SecureRandom.uuid }
 
+  # 調理時間の単位
+  enum cooking_time: { under_five_minutes: 10, ten_minutes: 20, thirty_minutes: 30, one_hour: 40, overnight: 50 }, _prefix: :cooking_time  
+
   # レシピ名に限定
   scope :in_name, ->(name) { where('name LIKE ?', "%#{name}%") }
   # 材料名に限定
