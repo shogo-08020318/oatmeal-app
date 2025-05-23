@@ -26,12 +26,9 @@
         <div>
           <div>
             <%= f.label :cooking_time, class: "text-gray-600 font-semibold block mt-3 text-md" %><p class="text-sm text-red-500"><%= t('defaults.required') %></p>
-            <%= f.text_field :cooking_time, class: "w-full bg-white shadow-md px-4 py-1.5 rounded-lg focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring focus:ring-orange-400 focus:ring-opacity-80", placeholder: '5' %>
+            <%= f.select :cooking_time, Food.cooking_times.keys.map {|k| [I18n.t("enums.food.cooking_time.#{k}"), k]}, { include_blank: "選択してください" }, class: "w-full bg-white shadow-md px-4 py-2 rounded-lg focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring focus:ring-orange-400 focus:ring-opacity-80" %>
           </div>
           <div>
-            <%= f.label :cooking_time_unit, class: "text-gray-600 font-semibold block mt-3 text-md" %><p class="text-sm text-red-500"><%= t('defaults.required') %></p>
-            <%= f.select :cooking_time_unit, Food.cooking_time_units.keys.map {|k| [I18n.t("enums.food.cooking_time_unit.#{k}"), k]}, { include_blank: "選択してください" },class: "w-full bg-white shadow-md px-4 py-2 rounded-lg focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring focus:ring-orange-400 focus:ring-opacity-80" %>
-          </div>
           <div>
             <%= f.label :serving, class: "text-gray-600 font-semibold block mt-3 text-md" %><p class="text-sm text-red-500"><%= t('defaults.required') %></p>
             <%= f.text_field :serving, class: "w-full bg-white shadow-md px-4 py-1.5 rounded-lg focus:outline-none rounded-md sm:mx-2 focus:outline-none focus:ring focus:ring-orange-400 focus:ring-opacity-80", placeholder: '2' %>
